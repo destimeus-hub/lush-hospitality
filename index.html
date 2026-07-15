@@ -729,8 +729,10 @@ ul { list-style: none; }
   border-radius: var(--radius-xl);
   overflow: hidden;
   aspect-ratio: 4/5;
+  max-height: 80vh;
   border: 1px solid var(--border);
   background: var(--surface);
+  width: 100%;
 }
 
 .feature-visual img {
@@ -771,6 +773,31 @@ ul { list-style: none; }
   display: grid;
   gap: 1.35rem;
   align-content: start;
+}
+
+/* ── Responsive: tablet & mobile ── */
+@media (max-width: 860px) {
+  .feature-strip {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .feature-visual {
+    aspect-ratio: 16/9;
+    max-height: 55vw;
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 500px) {
+  .feature-visual {
+    aspect-ratio: 4/3;
+    max-height: 70vw;
+    min-height: 180px;
+    border-radius: var(--radius);
+  }
+  .feature-visual .float-note strong {
+    font-size: 1.1rem;
+  }
 }
 
 .feature-list {
