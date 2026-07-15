@@ -1,0 +1,3863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Lush Hospitality — luxury cafés, restaurants, lounges, boutique hotels, cinemas, and catering in Kanpur. Crafted for Comfort. Curated for Class." />
+  <title>Lush Hospitality | Comfort · Connection · Celebration</title>
+  <style data-od-inline-asset="css/site.css">
+/* Lush Hospitality — 2026 editorial luxury system */
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,400;1,6..96,500&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+:root {
+  --bg: #0b0a09;
+  --bg-2: #12100e;
+  --bg-3: #1a1714;
+  --surface: #161310;
+  --surface-2: #1f1b17;
+  --fg: #f7f1e8;
+  --fg-soft: #e8dfd2;
+  --muted: #9a9084;
+  --muted-2: #6e665c;
+  --border: rgba(247, 241, 232, 0.1);
+  --border-strong: rgba(247, 241, 232, 0.18);
+  --accent: #c9a46a;
+  --accent-2: #e4c896;
+  --accent-dim: rgba(201, 164, 106, 0.12);
+  --accent-glow: rgba(201, 164, 106, 0.28);
+  --danger: #d4746a;
+  --success: #7dbf8a;
+
+  --font-display: 'Bodoni Moda', 'Times New Roman', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+
+  --radius-xs: 4px;
+  --radius-sm: 10px;
+  --radius: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --max: 1280px;
+  --max-wide: 1520px;
+  --nav-h: 72px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: clamp(15px, 0.95vw + 12px, 17px);
+  line-height: 1.6;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.035;
+  background-image: var(--grain);
+  background-size: 180px;
+  mix-blend-mode: overlay;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; color: inherit; }
+ul { list-style: none; }
+::selection { background: rgba(201, 164, 106, 0.35); color: var(--fg); }
+
+/* ── Typography ───────────────────────────────── */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 18px;
+  height: 1px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.eyebrow.center { justify-content: center; }
+.eyebrow.center::before { display: none; }
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-optical-sizing: auto;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  color: var(--fg);
+  text-wrap: balance;
+}
+
+.display em,
+.display i {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent-2);
+}
+
+.h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 6.5vw, 5rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  font-optical-sizing: auto;
+}
+
+.h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 4.5vw, 3.75rem);
+  font-weight: 500;
+  letter-spacing: -0.028em;
+  line-height: 1.05;
+  font-optical-sizing: auto;
+}
+
+.h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 2.6vw, 2.15rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.h4 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+
+.lead {
+  font-size: clamp(1.05rem, 1.35vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 38ch;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+}
+
+.body-lg {
+  font-size: clamp(1rem, 1.1vw, 1.125rem);
+  line-height: 1.7;
+  color: var(--fg-soft);
+  max-width: 52ch;
+  letter-spacing: -0.005em;
+}
+
+.muted { color: var(--muted); }
+
+.stat-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Layout ───────────────────────────────────── */
+.container {
+  width: min(100% - 2rem, var(--max));
+  margin-inline: auto;
+}
+
+.container-wide {
+  width: min(100% - 2rem, var(--max-wide));
+  margin-inline: auto;
+}
+
+.section {
+  padding: clamp(5rem, 11vw, 8.5rem) 0;
+  position: relative;
+}
+
+.section-tight {
+  padding: clamp(3.5rem, 7vw, 5.5rem) 0;
+}
+
+.section-head {
+  display: grid;
+  gap: 1.15rem;
+  margin-bottom: clamp(2.75rem, 5vw, 4rem);
+  max-width: 640px;
+}
+
+.section-head.center {
+  text-align: center;
+  margin-inline: auto;
+  justify-items: center;
+}
+
+.section-head.spread {
+  max-width: none;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.section-head .lead { margin-top: 0.15rem; }
+
+/* ── Nav ──────────────────────────────────────── */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  transition: background 0.4s var(--ease), border-color 0.4s, backdrop-filter 0.4s;
+  border-bottom: 1px solid transparent;
+}
+
+.site-header.is-scrolled {
+  background: rgba(11, 10, 9, 0.72);
+  backdrop-filter: blur(22px) saturate(1.4);
+  -webkit-backdrop-filter: blur(22px) saturate(1.4);
+  border-bottom-color: var(--border);
+}
+
+.nav-inner {
+  width: min(100% - 1.5rem, var(--max-wide));
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.logo em {
+  font-style: normal;
+  font-size: 0.58rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-weight: 500;
+  position: relative;
+  top: -0.12em;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  padding: 0.3rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+}
+
+.nav-links a {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  padding: 0.55rem 0.95rem;
+  border-radius: 999px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.is-active {
+  color: var(--fg);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.nav-cta { display: inline-flex; align-items: center; gap: 0.5rem; }
+
+.nav-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.03);
+  cursor: pointer;
+  place-items: center;
+  color: var(--fg);
+}
+
+.nav-toggle span,
+.nav-toggle span::before,
+.nav-toggle span::after {
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  background: currentColor;
+  position: relative;
+  transition: transform 0.25s var(--ease), opacity 0.2s;
+}
+
+.nav-toggle span::before,
+.nav-toggle span::after {
+  content: '';
+  position: absolute;
+  left: 0;
+}
+
+.nav-toggle span::before { top: -5px; }
+.nav-toggle span::after { top: 5px; }
+.nav-toggle[aria-expanded="true"] span { background: transparent; }
+.nav-toggle[aria-expanded="true"] span::before { top: 0; transform: rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span::after { top: 0; transform: rotate(-45deg); }
+
+/* ── Buttons ──────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 48px;
+  padding: 0.85rem 1.45rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.25s var(--ease), background 0.25s, border-color 0.25s, color 0.25s, box-shadow 0.25s;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:active { transform: translateY(1px) scale(0.99); }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-2) 0%, var(--accent) 55%, #a8844a 100%);
+  color: #14110e;
+  box-shadow: 0 12px 40px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.25);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 48px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--border-strong);
+  color: var(--fg);
+}
+
+.btn-ghost:hover {
+  border-color: rgba(247, 241, 232, 0.35);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.btn-soft {
+  background: var(--accent-dim);
+  color: var(--accent-2);
+  border-color: rgba(201, 164, 106, 0.22);
+}
+
+.btn-soft:hover {
+  background: rgba(201, 164, 106, 0.2);
+}
+
+.btn-sm {
+  min-height: 40px;
+  padding: 0.55rem 1.1rem;
+  font-size: 0.72rem;
+}
+
+.btn-lg {
+  min-height: 56px;
+  padding: 1rem 1.85rem;
+  font-size: 0.8125rem;
+}
+
+.btn-arrow svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s var(--ease);
+}
+
+.btn-arrow:hover svg { transform: translateX(3px); }
+
+/* ── Hero cinematic ───────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  align-items: end;
+  padding: calc(var(--nav-h) + 1.5rem) 0 0;
+  overflow: hidden;
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 38%;
+  transform: scale(1.06);
+  animation: heroKen 22s linear infinite alternate;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+@keyframes heroKen {
+  from { transform: scale(1.06) translate3d(0, 0, 0); }
+  to { transform: scale(1.12) translate3d(-1.5%, -1%, 0); }
+}
+
+.hero-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(100deg, rgba(11, 10, 9, 0.88) 0%, rgba(11, 10, 9, 0.45) 42%, rgba(11, 10, 9, 0.2) 68%, rgba(11, 10, 9, 0.75) 100%),
+    linear-gradient(180deg, rgba(11, 10, 9, 0.35) 0%, transparent 28%, rgba(11, 10, 9, 0.55) 70%, var(--bg) 100%);
+}
+
+.hero-glow {
+  position: absolute;
+  width: 55vw;
+  height: 55vw;
+  right: -10%;
+  top: 10%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 164, 106, 0.16) 0%, transparent 65%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 1;
+  will-change: auto;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 1.35rem;
+  max-width: 920px;
+  padding-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.hero-content .display {
+  font-size: clamp(3.4rem, 9.5vw, 7.25rem);
+  max-width: 11ch;
+}
+
+.hero-content .lead {
+  max-width: 42ch;
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 0.35rem;
+}
+
+.hero-bottom {
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid var(--border);
+  background: linear-gradient(180deg, transparent, rgba(11,10,9,0.55));
+  backdrop-filter: blur(8px);
+}
+
+.hero-meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+}
+
+.hero-meta > div {
+  background: rgba(11, 10, 9, 0.65);
+  padding: 1.35rem 1.5rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.hero-meta strong {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.hero-meta span {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* ── Marquee ──────────────────────────────────── */
+.marquee-band {
+  border-block: 1px solid var(--border);
+  background: var(--bg-2);
+  overflow: hidden;
+  padding: 1rem 0;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 0;
+  animation: marquee 42s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.marquee-track:hover { animation-play-state: paused; }
+
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0 1.75rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  color: var(--fg-soft);
+}
+
+.marquee-item i {
+  font-style: normal;
+  color: var(--accent);
+  font-size: 0.55em;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ── Bento / asymmetric ───────────────────────── */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: minmax(160px, auto);
+  gap: 0.85rem;
+}
+
+.bento-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  min-height: 220px;
+  transition: border-color 0.35s, box-shadow 0.35s;
+}
+
+.bento-card:hover {
+  border-color: rgba(201, 164, 106, 0.35);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+}
+
+.bento-card.span-7 { grid-column: span 7; }
+.bento-card.span-5 { grid-column: span 5; }
+.bento-card.span-4 { grid-column: span 4; }
+.bento-card.span-8 { grid-column: span 8; }
+.bento-card.span-6 { grid-column: span 6; }
+.bento-card.span-12 { grid-column: span 12; }
+.bento-card.row-2 { grid-row: span 2; min-height: 380px; }
+
+.bento-media {
+  position: absolute;
+  inset: 0;
+}
+
+.bento-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
+  will-change: transform;
+  cursor: pointer;
+}
+
+.bento-card:hover .bento-media img {
+  transform: scale(1.06);
+}
+
+.bento-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, transparent 20%, rgba(11, 10, 9, 0.92) 100%),
+    linear-gradient(90deg, rgba(11, 10, 9, 0.35), transparent 50%);
+}
+
+.bento-body {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 1.5rem 1.5rem 1.4rem;
+  z-index: 1;
+  display: grid;
+  gap: 0.55rem;
+  pointer-events: none;
+}
+.bento-body .card-link,
+.bento-body a,
+.bento-body button {
+  pointer-events: auto;
+}
+
+.bento-body .card-tag,
+.card-tag {
+  display: inline-flex;
+  align-self: start;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  background: rgba(11, 10, 9, 0.75);
+  border: 1px solid rgba(201, 164, 106, 0.28);
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+}
+
+.bento-body p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  max-width: 36ch;
+}
+
+.bento-solid {
+  padding: 1.75rem;
+  display: grid;
+  align-content: space-between;
+  gap: 1.5rem;
+  background:
+    radial-gradient(ellipse 80% 70% at 100% 0%, rgba(201, 164, 106, 0.1), transparent 55%),
+    var(--surface);
+}
+
+.bento-solid .giant {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 7vw, 5.5rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  color: var(--accent);
+  opacity: 0.9;
+}
+
+.bento-solid h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.bento-solid p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  max-width: 28ch;
+}
+
+/* ── Split feature ────────────────────────────── */
+.feature-strip {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(1.75rem, 5vw, 4.5rem);
+  align-items: center;
+}
+
+.feature-visual {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.feature-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.feature-visual .float-note {
+  position: absolute;
+  left: 1.15rem;
+  right: 1.15rem;
+  bottom: 1.15rem;
+  padding: 1.15rem 1.25rem;
+  border-radius: var(--radius);
+  background: rgba(11, 10, 9, 0.88);
+  border: 1px solid var(--border-strong);
+  display: grid;
+  gap: 0.2rem;
+  pointer-events: none;
+}
+
+.feature-visual .float-note strong {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+.feature-visual .float-note span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+}
+
+.feature-copy {
+  display: grid;
+  gap: 1.35rem;
+  align-content: start;
+}
+
+.feature-list {
+  display: grid;
+  gap: 0;
+  margin-top: 0.25rem;
+}
+
+.feature-list li {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 1rem;
+  align-items: start;
+  padding: 1.15rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.feature-list .num {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--accent);
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.feature-list h4 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  letter-spacing: -0.015em;
+}
+
+.feature-list p {
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+/* ── Quote ────────────────────────────────────── */
+.quote-band {
+  position: relative;
+  border-block: 1px solid var(--border);
+  background:
+    radial-gradient(ellipse 55% 90% at 8% 50%, rgba(201, 164, 106, 0.09), transparent 55%),
+    var(--bg-2);
+  overflow: hidden;
+}
+
+.quote-band::after {
+  content: 'LUSH';
+  position: absolute;
+  right: -2%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-size: clamp(8rem, 22vw, 18rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  color: rgba(247, 241, 232, 0.03);
+  line-height: 0.8;
+  pointer-events: none;
+  user-select: none;
+}
+
+.quote-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 1.85rem;
+  max-width: 900px;
+}
+
+.quote-mark {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  line-height: 0.55;
+  color: var(--accent);
+  opacity: 0.85;
+}
+
+.quote-text {
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 3.8vw, 3rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--fg-soft);
+  max-width: 18ch;
+}
+
+.quote-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, var(--surface-2), var(--bg-3));
+  border: 1px solid var(--border-strong);
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--accent);
+}
+
+.quote-author strong {
+  display: block;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+}
+
+.quote-author span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* ── Experience rails ─────────────────────────── */
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.85rem;
+}
+
+.pill-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.35rem;
+  display: grid;
+  gap: 1rem;
+  min-height: 200px;
+  transition: border-color 0.3s, transform 0.35s var(--ease), background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.pill-card::before {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.pill-card:hover {
+  border-color: rgba(201, 164, 106, 0.3);
+  transform: translateY(-3px);
+  background: var(--surface-2);
+}
+
+.pill-card:hover::before { opacity: 1; }
+
+.pill-icon {
+  width: 40px;
+  height: 40px;
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--accent-dim);
+  border: 1px solid rgba(201, 164, 106, 0.18);
+}
+
+.pill-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pill-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+.pill-card p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* ── Events ───────────────────────────────────── */
+.event-list {
+  display: grid;
+  border-top: 1px solid var(--border-strong);
+}
+
+.event-row {
+  display: grid;
+  grid-template-columns: 130px 1fr auto;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.55rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.25s, padding 0.25s;
+}
+
+.event-row:hover {
+  background: rgba(255, 255, 255, 0.02);
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  margin-inline: -0.75rem;
+  border-radius: var(--radius-sm);
+}
+
+.event-row .tag {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.event-row h3 {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  letter-spacing: -0.015em;
+}
+
+.event-row p {
+  color: var(--muted);
+  font-size: 0.92rem;
+  max-width: 48ch;
+}
+
+/* ── Reviews ──────────────────────────────────── */
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+}
+
+.review-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 1.55rem;
+  display: grid;
+  gap: 1.15rem;
+  min-height: 240px;
+  transition: border-color 0.3s, transform 0.35s var(--ease);
+}
+
+.review-card:hover {
+  border-color: rgba(201, 164, 106, 0.28);
+  transform: translateY(-2px);
+}
+
+.stars {
+  color: var(--accent);
+  letter-spacing: 0.16em;
+  font-size: 0.8rem;
+}
+
+.review-card p {
+  color: var(--fg-soft);
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.6vw, 1.4rem);
+  font-style: italic;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+}
+
+.review-card footer {
+  margin-top: auto;
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ── Property detail ──────────────────────────── */
+.page-hero {
+  padding: calc(var(--nav-h) + 4rem) 0 3.5rem;
+  border-bottom: 1px solid var(--border);
+  background:
+    radial-gradient(ellipse 50% 80% at 90% 0%, rgba(201, 164, 106, 0.1), transparent 55%),
+    var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero-inner {
+  display: grid;
+  gap: 1.2rem;
+  max-width: 780px;
+  position: relative;
+  z-index: 1;
+}
+
+.prop-detail {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+  padding: clamp(2.75rem, 5.5vw, 4.5rem) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.prop-detail:nth-child(even) { direction: rtl; }
+.prop-detail:nth-child(even) > * { direction: ltr; }
+
+.prop-visual {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  aspect-ratio: 5/4;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  position: relative;
+}
+
+.prop-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease);
+}
+
+.prop-detail:hover .prop-visual img {
+  transform: scale(1.04);
+}
+
+.prop-copy {
+  display: grid;
+  gap: 1.1rem;
+  align-content: start;
+}
+
+.prop-copy .lead { max-width: none; }
+
+/* ── Forms ────────────────────────────────────── */
+.form-shell {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+}
+
+.form-card {
+  background:
+    radial-gradient(ellipse 70% 50% at 0% 0%, rgba(201, 164, 106, 0.08), transparent 50%),
+    var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xl);
+  padding: clamp(1.6rem, 3vw, 2.4rem);
+  display: grid;
+  gap: 1.15rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.field label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  min-height: 50px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
+  background: rgba(11, 10, 9, 0.55);
+  padding: 0.75rem 0.95rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: rgba(201, 164, 106, 0.55);
+  box-shadow: 0 0 0 3px rgba(201, 164, 106, 0.12);
+}
+
+.field .error {
+  color: var(--danger);
+  font-size: 0.78rem;
+  display: none;
+}
+
+.field.is-invalid input,
+.field.is-invalid select,
+.field.is-invalid textarea {
+  border-color: var(--danger);
+}
+
+.field.is-invalid .error { display: block; }
+
+.form-note {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.form-success {
+  display: none;
+  padding: 1rem 1.1rem;
+  border-radius: var(--radius-sm);
+  background: rgba(125, 191, 138, 0.12);
+  border: 1px solid rgba(125, 191, 138, 0.3);
+  color: #b5e0be;
+  font-size: 0.92rem;
+}
+
+.form-success.is-visible { display: block; }
+
+.contact-stack { display: grid; gap: 0.85rem; }
+
+.contact-card {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.3rem 1.4rem;
+  transition: border-color 0.25s;
+}
+
+.contact-card:hover { border-color: rgba(201, 164, 106, 0.3); }
+
+.contact-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.015em;
+}
+
+.contact-card p,
+.contact-card a {
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.contact-card a:hover { color: var(--fg); }
+
+/* ── CTA ──────────────────────────────────────── */
+.cta-band {
+  background:
+    radial-gradient(ellipse 60% 100% at 80% 50%, rgba(201, 164, 106, 0.12), transparent 55%),
+    linear-gradient(135deg, #17140f, #100e0c);
+  border-block: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-inner .h2 {
+  max-width: 12ch;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+}
+
+/* ── Footer ───────────────────────────────────── */
+.site-footer {
+  padding: 4.5rem 0 2rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg-2);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.footer-brand .logo { margin-bottom: 1rem; }
+
+.footer-brand p {
+  color: var(--muted);
+  max-width: 30ch;
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.footer-col h4 {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg);
+  margin-bottom: 1.1rem;
+}
+
+.footer-col a,
+.footer-col p {
+  display: block;
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.55rem;
+  transition: color 0.2s;
+}
+
+.footer-col a:hover { color: var(--fg); }
+
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted-2);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+/* ── Horizontal property scroll ───────────────── */
+.hscroll-wrap {
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.hscroll {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 0.75rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) transparent;
+}
+
+.hscroll::-webkit-scrollbar { height: 4px; }
+.hscroll::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 999px;
+}
+
+.hscroll-card {
+  flex: 0 0 min(78vw, 360px);
+  scroll-snap-align: start;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  min-height: 420px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.3s, transform 0.4s var(--ease);
+}
+
+.hscroll-card:hover {
+  border-color: rgba(201, 164, 106, 0.35);
+  transform: translateY(-4px);
+}
+
+.hscroll-card .card-media {
+  position: absolute;
+  inset: 0;
+}
+
+.hscroll-card .card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease);
+  cursor: pointer;
+}
+
+.hscroll-card:hover .card-media img { transform: scale(1.05); }
+
+.hscroll-card .card-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 25%, rgba(11, 10, 9, 0.95) 100%);
+}
+
+.hscroll-card .card-body {
+  position: relative;
+  margin-top: auto;
+  padding: 1.4rem 1.35rem 1.5rem;
+  z-index: 1;
+  display: grid;
+  gap: 0.55rem;
+  pointer-events: none;
+}
+.hscroll-card .card-body a,
+.hscroll-card .card-body button {
+  pointer-events: auto;
+}
+
+.hscroll-card .card-body p {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  margin-top: 0.25rem;
+}
+
+.card-link svg {
+  width: 15px;
+  height: 15px;
+  transition: transform 0.25s var(--ease);
+}
+
+.hscroll-card:hover .card-link svg,
+.property-card:hover .card-link svg {
+  transform: translateX(3px);
+}
+
+/* legacy property-card support */
+.property-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.4s var(--ease), border-color 0.35s, box-shadow 0.35s;
+}
+
+.property-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(201, 164, 106, 0.35);
+  box-shadow: 0 30px 70px rgba(0,0,0,0.4);
+}
+
+.property-card .card-media {
+  position: relative;
+  flex: 1;
+  min-height: 220px;
+  overflow: hidden;
+}
+
+.property-card .card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease);
+  cursor: pointer;
+}
+
+.property-card:hover .card-media img { transform: scale(1.05); }
+
+.property-card .card-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 30%, rgba(11, 10, 9, 0.95) 100%);
+}
+
+.property-card .card-body {
+  position: relative;
+  margin-top: -5rem;
+  padding: 0 1.4rem 1.5rem;
+  z-index: 1;
+  display: grid;
+  gap: 0.55rem;
+  pointer-events: none;
+}
+.property-card .card-body a,
+.property-card .card-body button {
+  pointer-events: auto;
+}
+
+.property-card .card-body p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Gallery Page Grid (Masonry Column Flow Layout) ── */
+.gallery-grid {
+  column-count: 3;
+  column-gap: 1.25rem;
+  padding: 2.5rem 0 5rem;
+}
+.gallery-card {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  margin-bottom: 1.25rem;
+  break-inside: avoid;
+  display: block;
+  transition: border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+.gallery-card:hover {
+  border-color: rgba(201, 164, 106, 0.35);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+.gallery-card.landscape {
+  aspect-ratio: 3 / 2;
+}
+.gallery-card.portrait {
+  aspect-ratio: 3 / 4;
+}
+
+.gallery-card .card-media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+.gallery-card .card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  cursor: pointer;
+}
+.gallery-card:hover .card-media img {
+  transform: scale(1.04);
+}
+.gallery-card .card-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 35%, rgba(11, 10, 9, 0.95) 100%);
+  z-index: 1;
+}
+.gallery-card .card-body {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 2;
+  padding: 2rem 1.75rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+.gallery-card .card-tag {
+  align-self: start;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  background: rgba(22, 19, 16, 0.7);
+  border: 1px solid rgba(201, 164, 106, 0.28);
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+}
+.gallery-card .card-title {
+  font-family: var(--font-display, Georgia, serif);
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-weight: 500;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  margin-top: 0.25rem;
+}
+@media (max-width: 900px) {
+  .gallery-grid {
+    column-count: 2;
+    column-gap: 1rem;
+  }
+  .gallery-card {
+    margin-bottom: 1rem;
+  }
+}
+@media (max-width: 600px) {
+  .gallery-grid {
+    column-count: 1;
+    column-gap: 0.85rem;
+  }
+  .gallery-card {
+    margin-bottom: 0.85rem;
+  }
+}
+/* Cleaned old media queries */
+
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.85rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.85rem; }
+
+/* ── Motion / reveal ──────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
+  will-change: opacity, transform;
+}
+
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+
+/* ── Scroll progress ──────────────────────────── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  z-index: 200;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  box-shadow: 0 0 12px var(--accent-glow);
+  pointer-events: none;
+}
+
+/* ── Responsive ───────────────────────────────── */
+@media (max-width: 1000px) {
+  .nav-toggle { display: grid; }
+
+  .nav-links {
+    position: fixed;
+    top: var(--nav-h);
+    left: 0.75rem;
+    right: 0.75rem;
+    background: rgba(11, 10, 9, 0.96);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-strong);
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.75rem;
+    gap: 0.2rem;
+    border-radius: var(--radius);
+    transform: translateY(-12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.35s var(--ease), opacity 0.25s;
+  }
+
+  .nav-links.is-open {
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-links a {
+    padding: 0.95rem 1rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .nav-cta { display: none; }
+
+  .grid-2,
+  .grid-3,
+  .grid-4,
+  .pill-grid,
+  .review-grid,
+  .feature-strip,
+  .form-shell,
+  .prop-detail,
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bento {
+    grid-template-columns: 1fr;
+  }
+
+  .bento-card.span-7,
+  .bento-card.span-5,
+  .bento-card.span-4,
+  .bento-card.span-8,
+  .bento-card.span-6,
+  .bento-card.span-12 {
+    grid-column: span 1;
+  }
+
+  .bento-card.row-2 {
+    grid-row: span 1;
+    min-height: 320px;
+  }
+
+  .prop-detail:nth-child(even) { direction: ltr; }
+
+  .event-row {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+  }
+
+  .hero-meta { grid-template-columns: 1fr; }
+
+  .hero-content .display {
+    font-size: clamp(3rem, 13vw, 4.5rem);
+    max-width: none;
+  }
+
+  .form-row { grid-template-columns: 1fr; }
+
+  .quote-text { max-width: none; }
+}
+
+@media (max-width: 640px) {
+  .container,
+  .container-wide {
+    width: min(100% - 1.25rem, var(--max));
+  }
+
+  .pill-grid { grid-template-columns: 1fr 1fr; }
+
+  .hero {
+    min-height: 94svh;
+  }
+
+  .hscroll-card {
+    flex-basis: min(86vw, 320px);
+    min-height: 380px;
+  }
+}
+
+@media (min-width: 1001px) and (max-width: 1200px) {
+  .pill-grid { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .bento-card.span-7 { grid-column: span 6; }
+  .bento-card.span-5 { grid-column: span 6; }
+  .bento-card.span-4 { grid-column: span 6; }
+  .bento-card.span-8 { grid-column: span 6; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .marquee-track { animation: none; }
+  .hero-media img { animation: none; }
+}
+
+
+/* SPA Routing and View Management */
+.app-view {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.app-view.active {
+  display: block;
+  opacity: 1;
+}
+
+/* Floating Glassmorphic Admin Image Manager Panel */
+#admin-panel-trigger {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 10000;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(22, 19, 16, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--accent);
+  color: var(--accent-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 0 12px var(--accent-glow);
+  transition: transform 0.3s, background 0.3s;
+}
+#admin-panel-trigger:hover {
+  transform: scale(1.08) rotate(15deg);
+  background: var(--surface-2);
+}
+#admin-panel-trigger svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  fill: none;
+}
+#admin-manager-drawer {
+  position: fixed;
+  bottom: 5.5rem;
+  right: 1.5rem;
+  width: 340px;
+  max-width: 90vw;
+  background: rgba(22, 19, 16, 0.94);
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  z-index: 9999;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+  transform: translateY(20px) scale(0.95);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s;
+}
+#admin-manager-drawer.open {
+  transform: none;
+  opacity: 1;
+  pointer-events: auto;
+}
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1rem;
+}
+.admin-header h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--fg);
+}
+.admin-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 1.55rem;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.admin-close:hover { color: var(--fg); }
+.admin-field {
+  display: grid;
+  gap: 0.45rem;
+  margin-bottom: 1rem;
+}
+.admin-field label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+}
+.admin-field select, .admin-field input[type="file"] {
+  width: 100%;
+  background: rgba(11, 10, 9, 0.6);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem;
+  font-size: 0.85rem;
+  color: var(--fg);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.admin-field select:focus {
+  border-color: var(--accent);
+}
+.admin-dropzone {
+  border: 2px dashed rgba(201, 164, 106, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 1.5rem 1rem;
+  text-align: center;
+  background: rgba(255,255,255,0.02);
+  cursor: pointer;
+  transition: background 0.25s, border-color 0.25s;
+}
+.admin-dropzone:hover {
+  background: rgba(201, 164, 106, 0.06);
+  border-color: var(--accent);
+}
+.admin-dropzone p {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.admin-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+.admin-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+.admin-btn-primary {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+}
+.admin-btn-primary:hover {
+  background: var(--accent-2);
+}
+.admin-btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--fg);
+}
+.admin-btn-secondary:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+/* ── 3D Animated Carousel ──────────────────── */
+.carousel-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  background: rgba(10, 8, 7, 0.88);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.carousel-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.carousel-card {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  width: 100%;
+  max-width: 100vw;
+  max-height: 90vh;
+  overflow: visible;
+  box-shadow: none;
+  transform: scale(0.95);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.carousel-overlay.open .carousel-card {
+  transform: scale(1);
+}
+.carousel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  border: none;
+}
+.carousel-header h3 {
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+  text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+.carousel-close {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-size: 1.3rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+.carousel-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+.carousel-viewport {
+  position: relative;
+  overflow: visible;
+  width: 100%;
+  height: 480px;
+  perspective: 1200px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.carousel-rail {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: 100%;
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.carousel-slide {
+  position: absolute;
+  width: 420px;
+  height: 280px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.3, 1), filter 0.6s, opacity 0.6s, z-index 0.6s;
+  user-select: none;
+}
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.6);
+  pointer-events: auto;
+}
+.carousel-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+.carousel-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-50%) scale(1.1);
+}
+.carousel-nav-btn.prev { left: 40px; }
+.carousel-nav-btn.next { right: 40px; }
+.carousel-nav-btn svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 2rem;
+  background: transparent;
+}
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.carousel-dot.active {
+  background: #ffffff;
+  width: 24px;
+  border-radius: 999px;
+}
+.carousel-dot:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.5);
+}
+@media (max-width: 768px) {
+  .carousel-slide { width: 80vw; height: 50vw; max-width: 320px; max-height: 200px; }
+  .carousel-viewport { height: 320px; }
+  .carousel-nav-btn { width: 40px; height: 40px; }
+  .carousel-nav-btn.prev { left: 10px; }
+  .carousel-nav-btn.next { right: 10px; }
+}
+
+
+/* SPA Routing and View Management */
+.app-view {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.app-view.active {
+  display: block;
+  opacity: 1;
+}
+
+</style>
+</head>
+<body>
+  <div class="scroll-progress" data-od-id="scroll-progress" id="scroll-progress"></div>
+
+  <header class="site-header" data-od-id="site-header">
+    <div class="nav-inner">
+      <a href="#home" class="logo" data-od-id="logo">LUSH <em>Hospitality</em></a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-od-id="nav-toggle">
+        <span></span>
+      </button>
+      <nav class="nav-links" data-od-id="nav-links" aria-label="Primary">
+        <a href="#home" data-nav="index.html">Home</a>
+        <a href="#properties" data-nav="properties.html">Properties</a>
+        <a href="#experiences" data-nav="experiences.html">Experiences</a>
+        <a href="#about" data-nav="about.html">About</a>
+        <a href="#reserve" data-nav="reserve.html">Reserve</a>
+        <a href="#gallery" data-nav="gallery.html">Gallery</a>
+      </nav>
+      <div class="nav-cta">
+        <a class="btn btn-primary btn-sm" href="#reserve" data-od-id="nav-reserve">Reserve</a>
+      </div>
+    </div>
+  </header>
+
+  
+  
+  <main>
+    <div id="home-view" class="app-view active">
+      <!-- Cinematic hero -->
+    <section class="hero" data-od-id="hero">
+      <div class="hero-media" aria-hidden="true">
+        <img src="assets/frames/1.png" alt="" width="1920" height="1080" data-admin-img="home-hero-bg" loading="eager" fetchpriority="high" />
+      </div>
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="container-wide hero-content">
+        <p class="eyebrow" data-od-id="hero-eyebrow">Kanpur · Est. 2020</p>
+        <h1 class="display" data-od-id="hero-title">Crafted for<br /><em>comfort.</em><br />Curated for<br /><em>class.</em></h1>
+        <p class="lead" data-od-id="hero-lead">A premium collection of cafés, restaurants, lounges, boutique hotels, cinemas & catering — where guests come not just to eat, but to feel.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary btn-lg btn-arrow" href="#properties" data-od-id="hero-cta-properties">
+            Explore properties
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn-ghost btn-lg" href="#reserve" data-od-id="hero-cta-reserve">Plan a stay</a>
+        </div>
+      </div>
+      <div class="hero-bottom">
+        <div class="container-wide hero-meta" data-od-id="hero-meta">
+          <div>
+            <strong>09+</strong>
+            <span>Signature spaces</span>
+          </div>
+          <div>
+            <strong>1983</strong>
+            <span>GP Cinemas legacy</span>
+          </div>
+          <div>
+            <strong>One brand</strong>
+            <span>Multiple privileges</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee-band" data-od-id="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span class="marquee-item">Lush Garden <i>◆</i></span>
+        <span class="marquee-item">Waterview <i>◆</i></span>
+        <span class="marquee-item">Lush Bar & Cafe <i>◆</i></span>
+        <span class="marquee-item">Miyabi <i>◆</i></span>
+        <span class="marquee-item">360° By Lush <i>◆</i></span>
+        <span class="marquee-item">Premier Hotel <i>◆</i></span>
+        <span class="marquee-item">Boutique Hotel <i>◆</i></span>
+        <span class="marquee-item">GP Cinemas <i>◆</i></span>
+        <span class="marquee-item">Luxury Line Catering <i>◆</i></span>
+        <span class="marquee-item">Lush Garden <i>◆</i></span>
+        <span class="marquee-item">Waterview <i>◆</i></span>
+        <span class="marquee-item">Lush Bar & Cafe <i>◆</i></span>
+        <span class="marquee-item">Miyabi <i>◆</i></span>
+        <span class="marquee-item">360° By Lush <i>◆</i></span>
+        <span class="marquee-item">Premier Hotel <i>◆</i></span>
+        <span class="marquee-item">Boutique Hotel <i>◆</i></span>
+        <span class="marquee-item">GP Cinemas <i>◆</i></span>
+        <span class="marquee-item">Luxury Line Catering <i>◆</i></span>
+      </div>
+    </div>
+
+    <!-- Intro split -->
+    <section class="section" data-od-id="section-intro">
+      <div class="container feature-strip">
+        <div class="feature-visual reveal" data-od-id="intro-visual">
+          <img src="assets/frames/3.png" alt="Lush hospitality interiors" width="900" height="1125" data-admin-img="intro-md-profile"  loading="lazy" />
+          <div class="float-note">
+            <strong>Angad Singh Saluja</strong>
+            <span>Founder & Managing Director</span>
+          </div>
+        </div>
+        <div class="feature-copy reveal">
+          <p class="eyebrow">The collection</p>
+          <h2 class="h2" data-od-id="intro-title">One brand.<br />Multiple privileges.</h2>
+          <p class="body-lg">Lush Hospitality began in 2020 to craft spaces that feel alive — inspired by nature, open air, green corners, and calming rhythm. Each property brings soulful design, eco-conscious thinking, and a love for meaningful gatherings.</p>
+          <ul class="feature-list" data-od-id="intro-pillars">
+            <li>
+              <span class="num">01</span>
+              <div>
+                <h4>Creators</h4>
+                <p>Spaces shaped by intention, not templates.</p>
+              </div>
+            </li>
+            <li>
+              <span class="num">02</span>
+              <div>
+                <h4>Progress</h4>
+                <p>From garden amphitheater to boutique hotel — still growing.</p>
+              </div>
+            </li>
+            <li>
+              <span class="num">03</span>
+              <div>
+                <h4>People</h4>
+                <p>Relationships first. Reservations second.</p>
+              </div>
+            </li>
+          </ul>
+          <div>
+            <a class="btn btn-soft btn-arrow" href="#about" data-od-id="intro-about-link">
+              Read our story
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bento properties -->
+    <section class="section section-tight" data-od-id="section-bento" style="padding-top:0;">
+      <div class="container-wide">
+        <div class="section-head spread reveal">
+          <div>
+            <p class="eyebrow">Signature spaces</p>
+            <h2 class="h2" data-od-id="props-preview-title">Our properties</h2>
+          </div>
+          <a class="btn btn-ghost" href="#properties" data-od-id="props-all-link">View full collection</a>
+        </div>
+
+        <div class="bento" data-od-id="props-bento">
+          <article class="bento-card span-5 bento-solid reveal reveal-delay-1" data-od-id="bento-stat">
+            <div class="giant">09</div>
+            <div>
+              <h3>Venues. One standard.</h3>
+              <p>From cinema heritage to rooftop nights — every space carries the Lush signature.</p>
+            </div>
+          </article>
+
+          <article class="bento-card span-7 row-2 reveal" data-od-id="bento-garden">
+            <div class="bento-media">
+              <img src="assets/frames/2.png" alt="Lush Garden & Cafe" width="1200" height="900" data-admin-img="bento-garden"  loading="lazy" />
+            </div>
+            <div class="bento-body">
+              <span class="card-tag">Amphitheater & Café</span>
+              <h3 class="h3">Lush Garden & Cafe</h3>
+              <p>Serene eco-conscious grounds with amphitheater, musical fountain, and globally inspired comfort food.</p>
+              <a class="card-link" href="#properties#garden">Explore space
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="bento-card span-5 reveal reveal-delay-2" data-od-id="bento-waterview">
+            <div class="bento-media">
+              <img src="assets/frames/5.png" alt="Waterview fine dining" width="800" height="600" data-admin-img="bento-waterview"  loading="lazy" />
+            </div>
+            <div class="bento-body">
+              <span class="card-tag">Fine Dining</span>
+              <h3 class="h3">Waterview</h3>
+              <p>Indian cuisine traditions in a fountain-facing setting.</p>
+            </div>
+          </article>
+
+          <article class="bento-card span-4 reveal" data-od-id="bento-premier">
+            <div class="bento-media">
+              <img src="assets/frames/6.png" alt="Lush Premier Hotel" width="700" height="500" data-admin-img="bento-premier"  loading="lazy" />
+            </div>
+            <div class="bento-body">
+              <span class="card-tag">Luxury Hotel</span>
+              <h3 class="h3">Premier Hotel</h3>
+              <p>Striking design, warm comfort, city heart.</p>
+            </div>
+          </article>
+
+          <article class="bento-card span-4 reveal reveal-delay-1" data-od-id="bento-cinema">
+            <div class="bento-media">
+              <img src="assets/frames/3.png" alt="GP Cinemas" width="700" height="500" data-admin-img="bento-cinema"  loading="lazy" />
+            </div>
+            <div class="bento-body">
+              <span class="card-tag">Since 1983</span>
+              <h3 class="h3">GP Cinemas</h3>
+              <p>Kanpur’s cinematic heartbeat.</p>
+            </div>
+          </article>
+
+          <article class="bento-card span-4 reveal reveal-delay-2" data-od-id="bento-miyabi">
+            <div class="bento-media">
+              <img src="assets/frames/1.png" alt="Miyabi lounge" width="700" height="500" data-admin-img="bento-miyabi"  loading="lazy" />
+            </div>
+            <div class="bento-body">
+              <span class="card-tag">Private Lounge</span>
+              <h3 class="h3">Miyabi</h3>
+              <p>Intimate celebrations. Club-like energy.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Horizontal scroll strip -->
+    <section class="section-tight" data-od-id="section-hscroll">
+      <div class="container-wide">
+        <div class="section-head reveal">
+          <p class="eyebrow">Scroll the collection</p>
+          <h2 class="h2">More spaces to discover</h2>
+        </div>
+      </div>
+      <div class="container-wide hscroll-wrap">
+        <div class="hscroll" data-od-id="property-rail">
+          <article class="hscroll-card reveal" data-od-id="rail-bar">
+            <div class="card-media"><img src="assets/frames/2.png" alt="Lush Bar & Cafe" width="600" height="800" data-admin-img="rail-bar"  loading="lazy" /></div>
+            <div class="card-body">
+              <span class="card-tag">Rooftop</span>
+              <h3 class="h3">Lush Bar & Cafe</h3>
+              <p>Curated cocktails and global comfort food under open sky.</p>
+              <a class="card-link" href="#properties#bar">Explore
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </article>
+          <article class="hscroll-card reveal reveal-delay-1" data-od-id="rail-360">
+            <div class="card-media"><img src="assets/frames/5.png" alt="360 By Lush" width="600" height="800" data-admin-img="rail-360"  loading="lazy" /></div>
+            <div class="card-body">
+              <span class="card-tag">360° Views</span>
+              <h3 class="h3">360° By Lush</h3>
+              <p>Palm trees to metro lines — hangouts and private celebrations.</p>
+              <a class="card-link" href="#properties#three-sixty">Explore
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </article>
+          <article class="hscroll-card reveal reveal-delay-2" data-od-id="rail-boutique">
+            <div class="card-media"><img src="assets/frames/6.png" alt="Boutique Hotel" width="600" height="800" data-admin-img="rail-boutique"  loading="lazy" /></div>
+            <div class="card-body">
+              <span class="card-tag">Boutique</span>
+              <h3 class="h3">Boutique Hotel</h3>
+              <p>Home-like spaces. Thoughtful layouts. Attentive service.</p>
+              <a class="card-link" href="#properties#boutique">Explore
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </article>
+          <article class="hscroll-card reveal reveal-delay-3" data-od-id="rail-catering">
+            <div class="card-media"><img src="assets/frames/3.png" alt="Luxury Line Catering" width="600" height="800" data-admin-img="rail-catering"  loading="lazy" /></div>
+            <div class="card-body">
+              <span class="card-tag">Catering</span>
+              <h3 class="h3">Luxury Line</h3>
+              <p>Live chef counters and modern presentation for celebrations.</p>
+              <a class="card-link" href="#properties#catering">Explore
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quote -->
+    <section class="section quote-band" data-od-id="section-quote">
+      <div class="container quote-inner reveal">
+        <div class="quote-mark" aria-hidden="true">“</div>
+        <blockquote class="quote-text" data-od-id="founder-quote">Hospitality is a living experience — created by people, inspired by purpose, and elevated through intention.</blockquote>
+        <div class="quote-author">
+          <div class="avatar" aria-hidden="true">A</div>
+          <div>
+            <strong>Angad Singh Saluja</strong>
+            <span>Founder & MD · Lush Hospitality</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experiences -->
+    <section class="section" data-od-id="section-experiences">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">How guests feel</p>
+          <h2 class="h2" data-od-id="exp-title">Experiences across the brand</h2>
+          <p class="lead">Dining, stay, cinema, celebrations, catering & lifestyle — every surface of hospitality under one intentional roof.</p>
+        </div>
+        <div class="pill-grid" data-od-id="exp-grid">
+          <article class="pill-card reveal" data-od-id="exp-dining">
+            <div class="pill-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 20h16M8 20V9M16 20V9M6 9h12M9 5h6v4H9z"/></svg>
+            </div>
+            <h3>Dining</h3>
+            <p>Gourmet recipes, fresh ingredients, rooftop cocktails, open-air comfort food.</p>
+          </article>
+          <article class="pill-card reveal reveal-delay-1" data-od-id="exp-stay">
+            <div class="pill-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M3 20h18M4 20V10l8-5 8 5v10M8 20v-5h8v5"/></svg>
+            </div>
+            <h3>Luxury Stay</h3>
+            <p>Boutique suites and premier rooms with warm service and modern detailing.</p>
+          </article>
+          <article class="pill-card reveal reveal-delay-2" data-od-id="exp-cinema">
+            <div class="pill-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M8 20h8M10 10l5 3-5 3v-6z"/></svg>
+            </div>
+            <h3>Cinema</h3>
+            <p>GP Cinemas — Kanpur’s cinematic heartbeat since 1983.</p>
+          </article>
+          <article class="pill-card reveal reveal-delay-3" data-od-id="exp-events">
+            <div class="pill-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M8 4v3M16 4v3M4 9h16M6 6h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/></svg>
+            </div>
+            <h3>Events</h3>
+            <p>Fashion runways, Dandiya nights, DJ lounges, New Year countdowns.</p>
+          </article>
+        </div>
+        <div style="margin-top:2rem;" class="reveal">
+          <a class="btn btn-soft btn-arrow" href="#experiences" data-od-id="exp-more">
+            See all experiences
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="section section-tight" data-od-id="section-reviews" style="padding-top:0;">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Testimonials</p>
+          <h2 class="h2">Highly acclaimed</h2>
+        </div>
+        <div class="review-grid" data-od-id="review-grid">
+          <article class="review-card reveal" data-od-id="review-1">
+            <div class="stars" aria-label="5 stars">★★★★★</div>
+            <p>“Unique amenities like an in-house cinema, restaurant, and bar. Delicious food, excellent service.”</p>
+            <footer>Verified Google Reviewer</footer>
+          </article>
+          <article class="review-card reveal reveal-delay-1" data-od-id="review-2">
+            <div class="stars" aria-label="5 stars">★★★★★</div>
+            <p>“Clean, spacious, well-maintained rooms. Excellent value — ideal for business and leisure.”</p>
+            <footer>Verified Business Guest</footer>
+          </article>
+          <article class="review-card reveal reveal-delay-2" data-od-id="review-3">
+            <div class="stars" aria-label="5 stars">★★★★★</div>
+            <p>“The amphitheater and musical fountain at Lush Garden are magical. A nature-first escape.”</p>
+            <footer>Google Maps Local Guide</footer>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section cta-band" data-od-id="section-cta">
+      <div class="container cta-inner reveal">
+        <div>
+          <p class="eyebrow">Plan your visit</p>
+          <h2 class="h2" data-od-id="cta-title">Reserve a table, suite, or celebration.</h2>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:0.75rem;">
+          <a class="btn btn-primary btn-lg" href="#reserve" data-od-id="cta-reserve">Confirm reservation</a>
+          <a class="btn btn-ghost btn-lg" href="tel:+919151195551" data-od-id="cta-call">+91 91511 95551</a>
+        </div>
+      </div>
+    </section>
+    </div>
+    
+    <div id="properties-view" class="app-view">
+      <section class="page-hero" data-od-id="page-hero-properties">
+      <div class="container page-hero-inner">
+        <p class="eyebrow">The collection</p>
+        <h1 class="h1" data-od-id="props-page-title">Our properties</h1>
+        <p class="lead">Nine signature spaces — gardens, fine dining, rooftops, lounges, hotels, cinema, and bespoke catering — each with its own character, one shared standard.</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0;" data-od-id="properties-list">
+      <div class="container">
+
+        <div id="main-properties-list" style="display:flex; flex-direction:column; gap:4rem;"></div>
+
+      </div>
+    </section>
+
+    <section class="section cta-band" data-od-id="props-cta">
+      <div class="container cta-inner reveal">
+        <div>
+          <p class="eyebrow">Next step</p>
+          <h2 class="h2">Ready to host or stay?</h2>
+        </div>
+        <a class="btn btn-primary btn-lg" href="#reserve">Start a reservation</a>
+      </div>
+    </section>
+    </div>
+    
+    <div id="experiences-view" class="app-view">
+      <section class="page-hero" data-od-id="page-hero-experiences">
+      <div class="container page-hero-inner">
+        <p class="eyebrow">Living hospitality</p>
+        <h1 class="h1" data-od-id="exp-page-title">Experiences</h1>
+        <p class="lead">Style, culture, music, and celebration — from fashion runways and Dandiya nights to private cinema and chef-led catering.</p>
+      </div>
+    </section>
+
+    <section class="section" data-od-id="section-exp-pillars">
+      <div class="container">
+        <div class="pill-grid" data-od-id="exp-pillars-full">
+          <article class="pill-card reveal" data-od-id="exp-full-dining">
+            <div class="pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20h16M8 20V9M16 20V9M6 9h12"/></svg></div>
+            <h3>Dining</h3>
+            <p>Gourmet recipes, mocktails, open-air setups, and chef specials across Waterview, Garden Café, and rooftops.</p>
+          </article>
+          <article class="pill-card reveal" data-od-id="exp-full-stay">
+            <div class="pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 20h18M4 20V10l8-5 8 5v10"/></svg></div>
+            <h3>Luxury Stay</h3>
+            <p>Premier and boutique rooms with polite hospitality, modern suites, and effortless check-in.</p>
+          </article>
+          <article class="pill-card reveal" id="cinema" data-od-id="exp-full-cinema">
+            <div class="pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M10 10l5 3-5 3v-6z"/></svg></div>
+            <h3>Cinema</h3>
+            <p>Private screens, comfortable seating, and a city legacy at GP Cinemas — Gurdev Palace.</p>
+          </article>
+          <article class="pill-card reveal" data-od-id="exp-full-celebrations">
+            <div class="pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v18M5 8l7-4 7 4M5 16l7 4 7-4"/></svg></div>
+            <h3>Celebrations</h3>
+            <p>Intimate party lounges, signature cocktails, and custom configurations for birthdays and anniversaries.</p>
+          </article>
+          <article class="pill-card reveal" data-od-id="exp-full-catering">
+            <div class="pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12h16M6 12V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v5M5 20h14"/></svg></div>
+            <h3>Catering</h3>
+            <p>Luxury Line culinary setups — live counters, global menus, and master-chef presentation.</p>
+          </article>
+          <article class="pill-card reveal" data-od-id="exp-full-lifestyle">
+            <div class="pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M8 12h8"/></svg></div>
+            <h3>Lifestyle</h3>
+            <p>Art and fashion pop-ups, boutique brands, and social hotspots for Kanpur’s creative scene.</p>
+          </article>
+          <article class="pill-card reveal" data-od-id="exp-full-hospitality">
+            <div class="pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a7 7 0 0 1 14 0c0 5.5-7 10-7 10z"/><circle cx="12" cy="11" r="2.5"/></svg></div>
+            <h3>Hospitality</h3>
+            <p>Warm reception, supportive staff, and standard-setting care from lobby to checkout.</p>
+          </article>
+          <article class="pill-card reveal" data-od-id="exp-full-events">
+            <div class="pill-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 4v3M16 4v3M4 9h16M6 6h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/></svg></div>
+            <h3>Events</h3>
+            <p>Year-round calendar of fashion, culture, music, and social exhibitions.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tight" data-od-id="section-events" style="padding-top:0;">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Calendar highlights</p>
+          <h2 class="h2" data-od-id="events-title">Events & celebrations</h2>
+          <p class="lead">We host a variety of events throughout the year — bringing style, culture, music, and celebration together.</p>
+        </div>
+        <div class="event-list" data-od-id="event-list">
+          <div class="event-row reveal" data-od-id="event-fashion">
+            <span class="tag">Fashion</span>
+            <div>
+              <h3>Fashion Fusion Runway</h3>
+              <p>An editorial-style showcase bringing together top trends and regional designers.</p>
+            </div>
+            <a class="btn btn-ghost btn-sm" href="#reserve">Inquire</a>
+          </div>
+          <div class="event-row reveal" data-od-id="event-dandiya">
+            <span class="tag">Culture</span>
+            <div>
+              <h3>Dandiya Nights</h3>
+              <p>Spirited traditional dance celebrations with live drums and full decoration.</p>
+            </div>
+            <a class="btn btn-ghost btn-sm" href="#reserve">Inquire</a>
+          </div>
+          <div class="event-row reveal" data-od-id="event-dj">
+            <span class="tag">Music</span>
+            <div>
+              <h3>DJ Parties</h3>
+              <p>Electric lounge club setups with signature mixologists and touring DJs.</p>
+            </div>
+            <a class="btn btn-ghost btn-sm" href="#reserve">Inquire</a>
+          </div>
+          <div class="event-row reveal" data-od-id="event-lifestyle">
+            <span class="tag">Social</span>
+            <div>
+              <h3>Lifestyle Exhibitions</h3>
+              <p>Curation of art, fashion pop-ups, and modern boutique brands.</p>
+            </div>
+            <a class="btn btn-ghost btn-sm" href="#reserve">Inquire</a>
+          </div>
+          <div class="event-row reveal" data-od-id="event-nye">
+            <span class="tag">Music</span>
+            <div>
+              <h3>New Year Celebrations</h3>
+              <p>Kanpur’s premium countdown with fireworks, live bands, and custom buffet menus.</p>
+            </div>
+            <a class="btn btn-ghost btn-sm" href="#reserve">Inquire</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" data-od-id="section-decor">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Styling</p>
+          <h2 class="h2">Decor & celebrations</h2>
+          <p class="lead">Every event is styled with custom floral patterns, micro-light arrangements, and architectural detailing.</p>
+        </div>
+        <div class="grid-3" data-od-id="decor-grid">
+          <article class="property-card reveal" data-od-id="decor-floral">
+            <div class="card-media">
+              <img src="assets/frames/2.png" alt="Luxury outdoor floral setup" width="800" height="600" data-admin-img="decor-floral-img"  loading="lazy" />
+            </div>
+            <div class="card-body">
+              <span class="card-tag">Outdoor</span>
+              <h3 class="h3">Luxury outdoor floral</h3>
+              <p>Grand garden installations for weddings, receptions, and open-air evenings.</p>
+            </div>
+          </article>
+          <article class="property-card reveal" data-od-id="decor-banquet">
+            <div class="card-media">
+              <img src="assets/frames/5.png" alt="Grand banquet lighting" width="800" height="600" data-admin-img="decor-banquet-img"  loading="lazy" />
+            </div>
+            <div class="card-body">
+              <span class="card-tag">Banquet</span>
+              <h3 class="h3">Grand banquet lighting</h3>
+              <p>Architectural light design for halls, stages, and formal celebrations.</p>
+            </div>
+          </article>
+          <article class="property-card reveal" data-od-id="decor-table">
+            <div class="card-media">
+              <img src="assets/frames/6.png" alt="Intimate table setting" width="800" height="600" data-admin-img="decor-table-img"  loading="lazy" />
+            </div>
+            <div class="card-body">
+              <span class="card-tag">Intimate</span>
+              <h3 class="h3">Table setting elegance</h3>
+              <p>Micro-detail place settings for private dinners and boutique affairs.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta-band">
+      <div class="container cta-inner reveal">
+        <div>
+          <p class="eyebrow">Host with Lush</p>
+          <h2 class="h2">Tell us about your event.</h2>
+        </div>
+        <a class="btn btn-primary btn-lg" href="#reserve">Request a proposal</a>
+      </div>
+    </section>
+    </div>
+    
+    <div id="about-view" class="app-view">
+      <section class="page-hero" data-od-id="page-hero-about">
+      <div class="container page-hero-inner">
+        <p class="eyebrow">Our story</p>
+        <h1 class="h1" data-od-id="about-title">Spaces that feel alive.</h1>
+        <p class="lead">Lush Hospitality began in 2020 to craft places inspired by nature — open spaces, green corners, and calming vibes. A collection of luxury cafés, lounges, boutique hotels, cinemas, and catering where guests come not just to eat, but to feel.</p>
+      </div>
+    </section>
+
+    <section class="section" data-od-id="section-story">
+      <div class="container feature-strip">
+        <div class="feature-visual reveal">
+          <img src="assets/frames/6.png" alt="Lush Hospitality property exterior" width="900" height="1125" data-admin-img="about-visual-img"  loading="lazy" />
+          <div class="float-note">
+            <strong>Since 2020</strong>
+            <span>Growing into a name trusted for comfort, creativity, and soulful experiences.</span>
+          </div>
+        </div>
+        <div class="feature-copy reveal">
+          <p class="eyebrow">The brand</p>
+          <h2 class="h2">Soulful design. Eco-conscious thinking.</h2>
+          <p class="body-lg">Each Lush property brings together meaningful gatherings — from cozy cafés and rooftop lounges to vibrant restaurants and a luxury hotel. We build for comfort, connection, and celebration.</p>
+          <ul class="feature-list">
+            <li>
+              <span class="num">01</span>
+              <div>
+                <h4>Creators</h4>
+                <p>Design that starts with purpose, not decoration.</p>
+              </div>
+            </li>
+            <li>
+              <span class="num">02</span>
+              <div>
+                <h4>Progress</h4>
+                <p>From amphitheater gardens to premier hospitality.</p>
+              </div>
+            </li>
+            <li>
+              <span class="num">03</span>
+              <div>
+                <h4>Innovation</h4>
+                <p>Nature-first layouts, musical fountains, multi-venue living.</p>
+              </div>
+            </li>
+            <li>
+              <span class="num">04</span>
+              <div>
+                <h4>Value</h4>
+                <p>Premium experience with honest hospitality economics.</p>
+              </div>
+            </li>
+            <li>
+              <span class="num">05</span>
+              <div>
+                <h4>People</h4>
+                <p>Team and guests complete every space.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section quote-band" data-od-id="section-founder">
+      <div class="container quote-inner reveal">
+        <div class="quote-mark" aria-hidden="true">“</div>
+        <blockquote class="quote-text">Hospitality is a living experience — created by people, inspired by purpose, and elevated through intention.</blockquote>
+        <div class="quote-author">
+          <div class="avatar">A</div>
+          <div>
+            <strong>Angad Singh Saluja</strong>
+            <span>Founder & Managing Director</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" data-od-id="section-distinctions">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Recognition</p>
+          <h2 class="h2">Distinctions</h2>
+          <p class="lead">Recognized for pioneering concepts, gourmet innovation, and standard-setting customer care.</p>
+        </div>
+        <div class="grid-3" data-od-id="awards-grid">
+          <article class="pill-card reveal" data-od-id="award-boutique">
+            <p class="eyebrow">Design</p>
+            <h3>Best Boutique Hotel Design</h3>
+            <p>Recognized for outstanding architectural façade and interior layout integration.</p>
+          </article>
+          <article class="pill-card reveal" data-od-id="award-gourmet">
+            <p class="eyebrow">Cuisine</p>
+            <h3>Gourmet Excellence Award</h3>
+            <p>Honored for creative global culinary techniques and in-house mixology standards.</p>
+          </article>
+          <article class="pill-card reveal" data-od-id="award-sustain">
+            <p class="eyebrow">Impact</p>
+            <h3>Outstanding Sustainable Design</h3>
+            <p>Awarded for nature-centric amphitheater, solar arrays, and green landscaping.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tight" data-od-id="section-media" style="padding-top:0;">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Press</p>
+          <h2 class="h2">Media & recognition</h2>
+          <p class="lead">Features, celebrity visits, and coverage highlighting Kanpur’s boutique hospitality heartbeat.</p>
+        </div>
+        <div class="review-grid" data-od-id="media-grid">
+          <article class="review-card reveal" data-od-id="media-1">
+            <p class="eyebrow">Celebrity Visit</p>
+            <p>“Aashu Semwal & Alisha Parveen praised the luxury boutique services.”</p>
+            <footer>TV Actors</footer>
+          </article>
+          <article class="review-card reveal" data-od-id="media-2">
+            <p class="eyebrow">Media Coverage</p>
+            <p>“Vishal Aditya Singh highlighted the premium dining at Waterview.”</p>
+            <footer>TV Actor</footer>
+          </article>
+          <article class="review-card reveal" data-od-id="media-3">
+            <p class="eyebrow">Press Review</p>
+            <p>“Lush Premier Hotel sets a new hospitality standard at Gurudev Palace Complex.”</p>
+            <footer>Local Press</footer>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" data-od-id="section-future">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Responsibility</p>
+          <h2 class="h2">Better Future Initiative</h2>
+          <p class="lead">Our efforts for a better future guide every operational step at Lush Hospitality.</p>
+        </div>
+        <div class="grid-3" data-od-id="sustain-grid">
+          <article class="pill-card reveal" data-od-id="sustain-trees">
+            <h3>Tree plantation</h3>
+            <p>Adding native plant species to garden amphitheaters to restore local bird life and air quality.</p>
+          </article>
+          <article class="pill-card reveal" data-od-id="sustain-nature">
+            <h3>Nature integration</h3>
+            <p>Designing structures around existing palms and green pockets for natural cooling.</p>
+          </article>
+          <article class="pill-card reveal" data-od-id="sustain-community">
+            <h3>Community & eco-conscious</h3>
+            <p>Local organic ingredients and zero-plastic priorities across banquet kitchens.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta-band">
+      <div class="container cta-inner reveal">
+        <div>
+          <p class="eyebrow">Visit Lush</p>
+          <h2 class="h2">Come feel the difference.</h2>
+        </div>
+        <a class="btn btn-primary btn-lg" href="#reserve">Reserve with us</a>
+      </div>
+    </section>
+    </div>
+    <div id="gallery-view" class="app-view">
+      <section class="page-hero" data-od-id="page-hero-gallery">
+        <div class="container page-hero-inner">
+          <p class="eyebrow">Curated Moments</p>
+          <h1 class="h1" data-od-id="gallery-title">Lush Gallery</h1>
+          <p class="lead">Explore the beauty of our spaces, culinary craft, and premium event set designs curated in our custom visual collection.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="gallery-grid" id="main-gallery-grid"></div>
+        </div>
+      </section>
+    </div>
+    
+    <div id="reserve-view" class="app-view">
+      <section class="page-hero" data-od-id="page-hero-reserve">
+      <div class="container page-hero-inner">
+        <p class="eyebrow">Plan your stay</p>
+        <h1 class="h1" data-od-id="reserve-title">Reservations</h1>
+        <p class="lead">Book a luxurious getaway at Lush Premier Hotel, inquire about rooms, event bookings, dining, or catering availability. Our reception team will confirm shortly.</p>
+      </div>
+    </section>
+
+    <section class="section" data-od-id="section-booking">
+      <div class="container form-shell">
+        <form class="form-card" id="reserve-form" data-od-id="reserve-form" novalidate>
+          <div>
+            <p class="eyebrow">Inquiry</p>
+            <h2 class="h3" style="margin-top:0.4rem;">Tell us your dates</h2>
+          </div>
+
+          <div class="form-success" data-od-id="form-success" tabindex="-1" role="status">
+            Thank you for choosing Lush Hospitality. Our reception desk will contact you shortly to confirm your booking.
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="checkin">Check-in</label>
+              <input type="date" id="checkin" name="checkin" required />
+              <span class="error">Please choose a check-in date.</span>
+            </div>
+            <div class="field">
+              <label for="checkout">Check-out</label>
+              <input type="date" id="checkout" name="checkout" required />
+              <span class="error">Check-out must be after check-in.</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="guests">Guests</label>
+              <select id="guests" name="guests">
+                <option value="1">1 Adult</option>
+                <option value="2" selected>2 Adults</option>
+                <option value="3">3 Adults</option>
+                <option value="4">4 Adults</option>
+                <option value="5+">5+ / Group</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="interest">Interest</label>
+              <select id="interest" name="interest">
+                <option value="hotel">Hotel stay</option>
+                <option value="dining">Dining</option>
+                <option value="event">Event / celebration</option>
+                <option value="cinema">Cinema / private screen</option>
+                <option value="catering">Catering</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="name">Full name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required autocomplete="name" />
+              <span class="error">Name is required.</span>
+            </div>
+            <div class="field">
+              <label for="phone">Phone number</label>
+              <input type="tel" id="phone" name="phone" placeholder="+91 91511 95551" required autocomplete="tel" />
+              <span class="error">Enter a valid phone number.</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="notes">Notes (optional)</label>
+            <textarea id="notes" name="notes" placeholder="Occasion, preferred property, dietary needs…"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" data-od-id="form-submit">Confirm reservation</button>
+          <p class="form-note">This form notifies our desk — final confirmation is by phone or email.</p>
+        </form>
+
+        <aside class="contact-stack reveal" data-od-id="contact-stack">
+          <div class="contact-card" data-od-id="contact-sales">
+            <h3>Sales & Events</h3>
+            <p><a href="tel:+919151195551">+91 91511 95551</a></p>
+            <p><a href="tel:+919151395551">+91 91513 95551</a></p>
+            <p><a href="mailto:sales@lushhospitality.in">sales@lushhospitality.in</a></p>
+          </div>
+          <div class="contact-card" data-od-id="contact-front">
+            <h3>Front Office</h3>
+            <p><a href="tel:+918009775533">+91 80097 75533</a></p>
+            <p><a href="tel:+919005795551">+91 90057 95551</a></p>
+            <p><a href="mailto:contact@lushhospitality.in">contact@lushhospitality.in</a></p>
+          </div>
+          <div class="contact-card" data-od-id="contact-founder">
+            <h3>Direct</h3>
+            <p>Angad Singh Saluja</p>
+            <p><a href="mailto:angad.s.saluja@gmail.com">angad.s.saluja@gmail.com</a></p>
+          </div>
+          <div class="contact-card" data-od-id="contact-web">
+            <h3>Online</h3>
+            <p><a href="https://lushhospitality.in" target="_blank" rel="noopener">lushhospitality.in</a></p>
+            <p><a href="https://instagram.com/lushhospitality.in" target="_blank" rel="noopener">@lushhospitality.in</a></p>
+          </div>
+        </aside>
+      </div>
+    </section>
+    </div>
+  </main>
+
+
+
+  <footer class="site-footer" data-od-id="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="logo">LUSH <em>Hospitality</em></div>
+        <p>Crafted for Comfort. Curated for Class. A premium hospitality collection in Kanpur.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <a href="#properties">Properties</a>
+        <a href="#experiences">Experiences</a>
+        <a href="#about">About</a>
+        <a href="#reserve">Reserve</a>
+        <a href="#gallery">Gallery</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>sales@lushhospitality.in</p>
+        <p>contact@lushhospitality.in</p>
+        <a href="tel:+919151195551">+91 91511 95551</a>
+      </div>
+      <div class="footer-col">
+        <h4>Social</h4>
+        <a href="https://lushhospitality.in" target="_blank" rel="noopener">Website</a>
+        <a href="https://instagram.com/lushhospitality.in" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 Lush Hospitality. All rights reserved.</span>
+      <span>Gurudev Palace Complex · Kanpur</span>
+    </div>
+  </footer>
+
+  <script>
+(function () {
+  var header = document.querySelector('[data-od-id="site-header"]');
+  var toggle = document.querySelector('[data-od-id="nav-toggle"]');
+  var links = document.querySelector('[data-od-id="nav-links"]');
+  var form = document.querySelector('[data-od-id="reserve-form"]');
+  var progress = document.getElementById('scroll-progress');
+
+  function onScroll() {
+    if (header) header.classList.toggle('is-scrolled', window.scrollY > 8);
+    if (progress) {
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - window.innerHeight;
+      var pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+      progress.style.width = pct + '%';
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  if (toggle && links) {
+    toggle.addEventListener('click', function () {
+      var open = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!open));
+      links.classList.toggle('is-open', !open);
+    });
+    links.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        toggle.setAttribute('aria-expanded', 'false');
+        links.classList.remove('is-open');
+      });
+    });
+  }
+
+  var io = null;
+  if ('IntersectionObserver' in window) {
+    io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
+  }
+
+  window.observeNewReveals = function() {
+    var reveals = document.querySelectorAll('.reveal:not(.is-in)');
+    if (io) {
+      reveals.forEach(function (el) { io.observe(el); });
+    } else {
+      reveals.forEach(function (el) { el.classList.add('is-in'); });
+    }
+  };
+
+  window.observeNewReveals();
+
+  if (form) {
+    var success = form.querySelector('[data-od-id="form-success"]');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var valid = true;
+      form.querySelectorAll('[required]').forEach(function (field) {
+        var wrap = field.closest('.field');
+        var ok = !!field.value.trim();
+        if (field.type === 'tel') ok = field.value.replace(/\D/g, '').length >= 10;
+        if (wrap) wrap.classList.toggle('is-invalid', !ok);
+        if (!ok) valid = false;
+      });
+      var checkin = form.querySelector('#checkin');
+      var checkout = form.querySelector('#checkout');
+      if (checkin && checkout && checkin.value && checkout.value) {
+        var okDates = new Date(checkout.value) > new Date(checkin.value);
+        checkout.closest('.field').classList.toggle('is-invalid', !okDates);
+        if (!okDates) valid = false;
+      }
+      if (!valid) return;
+      form.reset();
+      if (success) success.classList.add('is-visible');
+    });
+  }
+
+  var path = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  document.querySelectorAll('[data-nav]').forEach(function (a) {
+    var key = (a.getAttribute('data-nav') || '').toLowerCase();
+    if (key === path || (path === '' && key === 'index.html')) a.classList.add('is-active');
+  });
+
+  // Gentle horizontal wheel assist on property rail
+  var rail = document.querySelector('[data-od-id="property-rail"]');
+  if (rail) {
+    rail.addEventListener('wheel', function (e) {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        rail.scrollLeft += e.deltaY;
+      }
+    }, { passive: true });
+  }
+})();
+
+  // ── Carousel State ────────────────────────────────────────────────────────
+  var _carIdx = 0;
+  var _carList = [];
+
+  // ── Safe Storage Wrapper (IndexedDB Backend with Sync Cache fallback) ─────
+  var safeStorage = {
+    _cache: {},
+    _db: null,
+    init: function(callback) {
+      var self = this;
+      if (!window.indexedDB) {
+        try {
+          for (var key in localStorage) {
+            if (localStorage.hasOwnProperty(key)) {
+              self._cache[key] = localStorage.getItem(key);
+            }
+          }
+        } catch(e) {}
+        callback();
+        return;
+      }
+
+      var request = indexedDB.open("LushHospitalityDB", 1);
+      request.onupgradeneeded = function(e) {
+        var db = e.target.result;
+        if (!db.objectStoreNames.contains("settings")) {
+          db.createObjectStore("settings");
+        }
+      };
+      request.onsuccess = function(e) {
+        self._db = e.target.result;
+        var tx = self._db.transaction("settings", "readonly");
+        var store = tx.objectStore("settings");
+        
+        if (store.getAllKeys && store.getAll) {
+          var keysReq = store.getAllKeys();
+          keysReq.onsuccess = function() {
+            var valsReq = store.getAll();
+            valsReq.onsuccess = function() {
+              var keys = keysReq.result;
+              var vals = valsReq.result;
+              for (var i = 0; i < keys.length; i++) {
+                self._cache[keys[i]] = vals[i];
+              }
+              callback();
+            };
+          };
+        } else {
+          var cursorReq = store.openCursor();
+          cursorReq.onsuccess = function(event) {
+            var cursor = event.target.result;
+            if (cursor) {
+              self._cache[cursor.key] = cursor.value;
+              cursor.continue();
+            } else {
+              callback();
+            }
+          };
+        }
+      };
+      request.onerror = function() {
+        try {
+          for (var key in localStorage) {
+            if (localStorage.hasOwnProperty(key)) {
+              self._cache[key] = localStorage.getItem(key);
+            }
+          }
+        } catch(e) {}
+        callback();
+      };
+    },
+    getItem: function(key) {
+      return this._cache[key] || null;
+    },
+    setItem: function(key, val) {
+      this._cache[key] = val;
+      var self = this;
+      if (self._db) {
+        try {
+          var tx = self._db.transaction("settings", "readwrite");
+          var store = tx.objectStore("settings");
+          store.put(val, key);
+        } catch(e) {
+          console.error("IndexedDB write error:", e);
+        }
+      }
+      try {
+        localStorage.setItem(key, val);
+      } catch(e) {}
+      return true;
+    },
+    removeItem: function(key) {
+      delete this._cache[key];
+      var self = this;
+      try {
+        localStorage.removeItem(key);
+      } catch(e) {}
+      if (self._db) {
+        try {
+          var tx = self._db.transaction("settings", "readwrite");
+          var store = tx.objectStore("settings");
+          store.delete(key);
+        } catch(e) {
+          console.error("IndexedDB delete error:", e);
+        }
+      }
+      return true;
+    }
+  };
+
+  function _safeGetItem(key) {
+    return safeStorage.getItem(key);
+  }
+
+  // ── Get images for a slot from localStorage ───────────────────────────────
+  function _getImgList(key, fallbackSrc) {
+    // Check dynamic properties first
+    if (key.indexOf('prop-') === 0 || key.indexOf('prop-dynamic') === 0) {
+      var rawProp = _safeGetItem('lush_properties_items');
+      if (rawProp) {
+        try {
+          var items = JSON.parse(rawProp);
+          var match = items.find(function(item) { return item.id === key; });
+          if (match) {
+            if (match.images && match.images.length > 0) return match.images;
+            if (match.image) return [match.image];
+          }
+        } catch(e) {}
+      }
+    }
+
+    // Check dynamic gallery next
+    if (key.indexOf('gallery-') === 0 || key.indexOf('gal-dynamic') === 0) {
+      var rawGal = _safeGetItem('lush_gallery_items');
+      if (rawGal) {
+        try {
+          var items = JSON.parse(rawGal);
+          var match = items.find(function(item) { return item.id === key; });
+          if (match) {
+            if (match.images && match.images.length > 0) return match.images;
+            if (match.image) return [match.image];
+          }
+        } catch(e) {}
+      }
+    }
+
+    var raw = _safeGetItem('lush_img_' + key);
+    if (!raw) return [fallbackSrc];
+    try {
+      var parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    } catch(e) {}
+    return [raw];
+  }
+
+  // Default Starter Items
+  var defaultGallery = [
+    { id: 'gallery-1', image: '', tag: 'Lounge & Dining', title: 'Artistic Spaces', aspect: 'landscape' },
+    { id: 'gallery-2', image: '', tag: 'Nature Cozy', title: 'Verdant Corners', aspect: 'portrait' },
+    { id: 'gallery-3', image: '', tag: 'Aesthetics', title: 'Modern Lounge', aspect: 'landscape' },
+    { id: 'gallery-4', image: '', tag: 'Culinary Craft', title: 'Fine Presentation', aspect: 'portrait' },
+    { id: 'gallery-5', image: '', tag: 'Boutique Detail', title: 'Architectural Comfort', aspect: 'landscape' },
+    { id: 'gallery-6', image: '', tag: 'Lounge Vibes', title: 'Premium Settings', aspect: 'portrait' },
+    { id: 'gallery-7', image: '', tag: 'Amphitheater', title: 'Outdoor Gardens', aspect: 'landscape' },
+    { id: 'gallery-8', image: '', tag: 'Grand Hall', title: 'Signature Lush Hospitality', aspect: 'landscape' }
+  ];
+
+  var defaultProperties = [
+    { id: 'prop-1', image: '', tag: 'Amphitheater & Café', title: 'Lush Garden & Cafe', desc: 'A serene, eco-conscious space dedicated to harmony with nature. At its heart: a stunning amphitheater surrounded by greenery, a musical fountain, and globally inspired comfort food in a tranquil green setting.', link: '#reserve', btnText: 'Book this space' },
+    { id: 'prop-2', image: '', tag: 'Fine Dining', title: 'Waterview', desc: 'A premium fine dining destination blending Indian culinary tradition with a fountain-facing setting. Nestled in a prime location — every detail curated for comfort, flavor, and ambiance.', link: '#reserve', btnText: 'Reserve a table' },
+    { id: 'prop-3', image: '', tag: 'Rooftop Elegance', title: 'Lush Bar & Cafe', desc: 'A rooftop expression of Lush’s signature elegance. Curated cocktails and global comfort food where music gently fills the air — for casual gatherings and spirited evenings alike.', link: '#reserve', btnText: 'Plan an evening' },
+    { id: 'prop-4', image: '', tag: 'Private Lounge', title: 'Miyabi', desc: 'A refined private party space for intimate celebrations. By day: a quiet corner for curated gatherings. By night: club-like energy — classy affairs, great music, flowing drinks.', link: '#reserve', btnText: 'Host at Miyabi' },
+    { id: 'prop-5', image: '', tag: '360° Views', title: '360° By Lush', desc: 'Rooftop views, great food, better vibes. From palm trees to metro lines — chill hangouts or private celebrations with greenery and effortless style.', link: '#reserve', btnText: 'Book 360°' },
+    { id: 'prop-6', image: '', tag: 'Luxury Hotel', title: 'Lush Premier Hotel', desc: 'Striking design with warm comfort. From façade to elegantly styled rooms — vibrant bars, cozy lounges, and spacious banquet halls. In the city’s heart, every occasion becomes memorable.', link: '#reserve', btnText: 'Reserve a suite' },
+    { id: 'prop-7', image: '', tag: 'Bespoke Boutique', title: 'Lush Boutique Hotel', desc: 'What completes the experience is people — team and guests. Spaces that feel like home: thoughtful layouts, calming ambience, attentive service. Relationships, not just reservations.', link: '#reserve', btnText: 'Stay boutique' },
+    { id: 'prop-8', image: '', tag: 'Cinematic Heartbeat', title: 'GP Cinemas (Gurdev Palace)', desc: 'It began in 1983 — not just bricks and screens, but a dream that became Kanpur’s cinematic heartbeat. From jungle to skyline, lone landmark to living legacy. Even the metro station carries its name.', link: '#experiences#cinema', btnText: 'Cinema experiences' },
+    { id: 'prop-9', image: '', tag: 'Bespoke Catering', title: 'Luxury Line Culinary Services', desc: 'Upscale outdoor catering where a specially curated menu meets modern presentation. Lavish flavors crafted live by master chefs for remarkable celebrations.', link: '#reserve', btnText: 'Inquire catering' }
+  ];
+
+  function renderPropertiesPage() {
+    var grid = document.getElementById('main-properties-list');
+    if (!grid) return;
+    
+    var raw = _safeGetItem('lush_properties_items');
+    var items = [];
+    if (raw) {
+      try {
+        items = JSON.parse(raw);
+      } catch(e) {
+        items = defaultProperties;
+      }
+    } else {
+      items = defaultProperties;
+    }
+
+    grid.innerHTML = '';
+    
+    items.forEach(function(item, idx) {
+      if (item.hidden) return;
+      var article = document.createElement('article');
+      article.className = 'prop-detail reveal' + (idx > 0 ? ' reveal-delay-' + (idx % 3 + 1) : '');
+      article.setAttribute('data-od-id', 'prop-' + (idx + 1));
+      
+      var visualDiv = document.createElement('div');
+      visualDiv.className = 'prop-visual';
+      
+      var img = document.createElement('img');
+      img.src = item.image || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="800" style="background:%23161310;"><rect width="1000" height="800" fill="%23161310"/><text x="50%" y="50%" fill="%234a4136" font-family="sans-serif" font-weight="600" font-size="24" dominant-baseline="middle" text-anchor="middle">NO IMAGE</text></svg>';
+      img.alt = item.title || 'Property';
+      img.setAttribute('data-admin-img', item.id || ('prop-' + (idx + 1)));
+      img.setAttribute('loading', 'lazy');
+      img.width = 1000;
+      img.height = 800;
+      if(!item.image) {
+        img.style.backgroundColor = '#161310';
+      }
+      visualDiv.appendChild(img);
+      article.appendChild(visualDiv);
+      
+      var copyDiv = document.createElement('div');
+      copyDiv.className = 'prop-copy';
+      
+      if (item.tag) {
+        var tagSpan = document.createElement('span');
+        tagSpan.className = 'card-tag';
+        tagSpan.textContent = item.tag;
+        copyDiv.appendChild(tagSpan);
+      }
+      
+      if (item.title) {
+        var titleH2 = document.createElement('h2');
+        titleH2.className = 'h2';
+        titleH2.textContent = item.title;
+        copyDiv.appendChild(titleH2);
+      }
+
+      if (item.desc) {
+        var descP = document.createElement('p');
+        descP.className = 'body-lg';
+        descP.textContent = item.desc;
+        copyDiv.appendChild(descP);
+      }
+      
+      var linkA = document.createElement('a');
+      linkA.className = 'btn btn-soft';
+      linkA.href = item.link || '#reserve';
+      linkA.textContent = item.btnText || 'Book this space';
+      copyDiv.appendChild(linkA);
+
+      article.appendChild(copyDiv);
+      grid.appendChild(article);
+    });
+    if (window.observeNewReveals) window.observeNewReveals();
+  }
+
+  function syncHomePageProperties() {
+    var raw = _safeGetItem('lush_properties_items');
+    var items = [];
+    if (raw) {
+      try {
+        items = JSON.parse(raw);
+      } catch(e) {
+        items = defaultProperties;
+      }
+    } else {
+      items = defaultProperties;
+    }
+
+    var homeMapping = {
+      'prop-1': 'bento-garden',
+      'prop-2': 'bento-waterview',
+      'prop-6': 'bento-premier',
+      'prop-8': 'bento-cinema',
+      'prop-4': 'bento-miyabi',
+      'prop-3': 'rail-bar',
+      'prop-5': 'rail-360',
+      'prop-7': 'rail-boutique',
+      'prop-9': 'rail-catering'
+    };
+
+    Object.keys(homeMapping).forEach(function(propId) {
+      var homeId = homeMapping[propId];
+      var article = document.querySelector('[data-od-id="' + homeId + '"]');
+      if (!article) return;
+
+      var item = items.find(function(it) { return it.id === propId; });
+      if (!item || item.hidden) {
+        article.style.display = 'none';
+      } else {
+        article.style.display = '';
+        var img = article.querySelector('img');
+        if (img) {
+          img.src = item.image || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" style="background:%23161310;"><rect width="300" height="200" fill="%23161310"/><text x="50%" y="50%" fill="%234a4136" font-family="sans-serif" font-weight="600" font-size="13" dominant-baseline="middle" text-anchor="middle">NO IMAGE</text></svg>';
+          img.style.backgroundColor = item.image ? 'transparent' : '#161310';
+        }
+        var tag = article.querySelector('.card-tag');
+        if (tag) tag.textContent = item.tag || '';
+        var title = article.querySelector('.h3');
+        if (title) title.textContent = item.title || '';
+        var p = article.querySelector('p');
+        if (p) p.textContent = item.desc || '';
+      }
+    });
+
+    var rail = document.querySelector('[data-od-id="property-rail"]');
+    if (rail) {
+      rail.querySelectorAll('.dynamic-rail-card').forEach(function(card) {
+        card.remove();
+      });
+
+      items.forEach(function(item) {
+        if (item.hidden) return;
+        if (item.id && item.id.indexOf('prop-dynamic-') === 0) {
+          var article = document.createElement('article');
+          article.className = 'hscroll-card dynamic-rail-card reveal';
+          article.setAttribute('data-od-id', 'rail-dynamic-' + item.id);
+
+          var mediaDiv = document.createElement('div');
+          mediaDiv.className = 'card-media';
+          
+          var img = document.createElement('img');
+          img.src = item.image || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" style="background:%23161310;"><rect width="300" height="200" fill="%23161310"/><text x="50%" y="50%" fill="%234a4136" font-family="sans-serif" font-weight="600" font-size="13" dominant-baseline="middle" text-anchor="middle">NO IMAGE</text></svg>';
+          img.style.backgroundColor = item.image ? 'transparent' : '#161310';
+          img.setAttribute('loading', 'lazy');
+          mediaDiv.appendChild(img);
+          article.appendChild(mediaDiv);
+
+          var bodyDiv = document.createElement('div');
+          bodyDiv.className = 'card-body';
+
+          if (item.tag) {
+            var tagSpan = document.createElement('span');
+            tagSpan.className = 'card-tag';
+            tagSpan.textContent = item.tag;
+            bodyDiv.appendChild(tagSpan);
+          }
+
+          if (item.title) {
+            var titleH3 = document.createElement('h3');
+            titleH3.className = 'h3';
+            titleH3.textContent = item.title;
+            bodyDiv.appendChild(titleH3);
+          }
+
+          if (item.desc) {
+            var descP = document.createElement('p');
+            descP.textContent = item.desc;
+            bodyDiv.appendChild(descP);
+          }
+
+          var linkA = document.createElement('a');
+          linkA.className = 'card-link';
+          linkA.href = '#properties';
+          linkA.innerHTML = 'Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+          bodyDiv.appendChild(linkA);
+
+          article.appendChild(bodyDiv);
+          rail.appendChild(article);
+        }
+      });
+    }
+    if (window.observeNewReveals) window.observeNewReveals();
+  }
+
+  function renderGalleryPage() {
+    var grid = document.getElementById('main-gallery-grid');
+    if (!grid) return;
+    
+    var raw = _safeGetItem('lush_gallery_items');
+    var items = [];
+    if (raw) {
+      try {
+        items = JSON.parse(raw);
+      } catch(e) {
+        items = defaultGallery;
+      }
+    } else {
+      items = defaultGallery;
+    }
+
+    grid.innerHTML = '';
+    
+    items.forEach(function(item, idx) {
+      if (item.hidden) return;
+      var article = document.createElement('article');
+      article.className = 'gallery-card ' + (item.aspect || 'landscape') + ' reveal';
+      article.setAttribute('data-od-id', 'gal-card-' + (idx + 1));
+      
+      var mediaDiv = document.createElement('div');
+      mediaDiv.className = 'card-media';
+      
+      var img = document.createElement('img');
+      img.src = item.image || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" style="background:%23161310;"><rect width="300" height="200" fill="%23161310"/><text x="50%" y="50%" fill="%234a4136" font-family="sans-serif" font-weight="600" font-size="13" dominant-baseline="middle" text-anchor="middle">NO IMAGE</text></svg>';
+      img.alt = item.title || 'Lush Spaces';
+      img.setAttribute('data-admin-img', item.id || ('gallery-' + (idx + 1)));
+      img.setAttribute('loading', 'lazy');
+      if(!item.image) {
+        img.style.backgroundColor = '#161310';
+      }
+      
+      mediaDiv.appendChild(img);
+      article.appendChild(mediaDiv);
+      
+      var bodyDiv = document.createElement('div');
+      bodyDiv.className = 'card-body';
+      
+      if (item.tag) {
+        var tagSpan = document.createElement('span');
+        tagSpan.className = 'card-tag';
+        tagSpan.textContent = item.tag;
+        bodyDiv.appendChild(tagSpan);
+      }
+      
+      if (item.title) {
+        var titleH3 = document.createElement('h3');
+        titleH3.className = 'card-title';
+        titleH3.textContent = item.title;
+        bodyDiv.appendChild(titleH3);
+      }
+      
+      article.appendChild(bodyDiv);
+      grid.appendChild(article);
+    });
+    if (window.observeNewReveals) window.observeNewReveals();
+  }
+
+  // ── Apply localStorage overrides to all images on page ────────────────────
+  function applyImageOverrides() {
+    document.querySelectorAll('[data-admin-img]').forEach(function(img) {
+      var key = img.getAttribute('data-admin-img');
+      if (key && (key.indexOf('gallery-') === 0 || key.indexOf('gal-') === 0 || key.indexOf('prop-') === 0)) {
+        return;
+      }
+      if (!img.dataset.originalSrc) {
+        img.dataset.originalSrc = img.getAttribute('src');
+      }
+      var custom = _safeGetItem('lush_img_' + key);
+      if (custom) {
+        try {
+          var parsed = JSON.parse(custom);
+          img.src = parsed[0];
+        } catch(e) {
+          img.src = custom;
+        }
+        img.style.backgroundColor = 'transparent';
+      } else {
+        // Show empty grey box if no custom image is uploaded
+        img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" style="background:%23161310;"><rect width="300" height="200" fill="%23161310"/><text x="50%" y="50%" fill="%234a4136" font-family="sans-serif" font-weight="600" font-size="13" dominant-baseline="middle" text-anchor="middle">NO IMAGE</text></svg>';
+        img.style.backgroundColor = '#161310';
+      }
+    });
+  }
+
+  // ── Listen to localStorage changes & messages from admin.html ─────────────
+  window.addEventListener('storage', function(e) {
+    if (e.key && (e.key.indexOf('lush_img_') === 0 || e.key === 'lush_gallery_items' || e.key === 'lush_properties_items')) {
+      syncHomePageProperties();
+      renderPropertiesPage();
+      renderGalleryPage();
+      applyImageOverrides();
+      bindImageClicks();
+    }
+  });
+
+  window.addEventListener('message', function(e) {
+    if (e.data === 'update-images') {
+      syncHomePageProperties();
+      renderPropertiesPage();
+      renderGalleryPage();
+      applyImageOverrides();
+      bindImageClicks();
+    }
+  });
+
+  // Register with opener if index.html is opened by admin.html
+  if (window.opener) {
+    try {
+      window.opener.postMessage('register-child', '*');
+    } catch(e) {}
+  }
+
+
+
+  // ── Open carousel popup ───────────────────────────────────────────────────
+  window.openCarouselPopup = function(key, label) {
+    var srcImg = document.querySelector('[data-admin-img="' + key + '"]');
+    var fallback = srcImg ? (srcImg.dataset.originalSrc || srcImg.src) : '';
+    var images = _getImgList(key, fallback);
+    if (!images.length) return;
+
+    _carIdx = 0;
+    _carList = images;
+
+    // Title
+    var titleEl = document.getElementById('carousel-title');
+    if (titleEl) titleEl.textContent = label || 'Gallery';
+
+    // Build slides
+    var rail = document.getElementById('carousel-rail');
+    if (rail) {
+      rail.innerHTML = '';
+      images.forEach(function(src, i) {
+        var slide = document.createElement('div');
+        slide.className = 'carousel-slide';
+        
+        var img = document.createElement('img');
+        img.src = src;
+        img.alt = label || 'Gallery image';
+        slide.appendChild(img);
+
+        // Click side slides to navigate directly
+        slide.addEventListener('click', function(e) {
+          if (i !== _carIdx) {
+            e.stopPropagation();
+            _carGoTo(i);
+          }
+        });
+        
+        rail.appendChild(slide);
+      });
+    }
+
+    // Build dots
+    var dots = document.getElementById('carousel-dots');
+    if (dots) {
+      dots.innerHTML = '';
+      if (images.length > 1) {
+        images.forEach(function(_, i) {
+          var d = document.createElement('span');
+          d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+          d.addEventListener('click', function() { _carGoTo(i); });
+          dots.appendChild(d);
+        });
+      }
+    }
+
+    // Show/hide arrows
+    var show = images.length > 1;
+    var prev = document.querySelector('.carousel-nav-btn.prev');
+    var next = document.querySelector('.carousel-nav-btn.next');
+    if (prev) prev.style.display = show ? 'flex' : 'none';
+    if (next) next.style.display = show ? 'flex' : 'none';
+
+    // Apply initial 3D positions
+    _carUpdate();
+
+    // Open overlay
+    var overlay = document.getElementById('carousel-overlay');
+    if (overlay) {
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  window.closeCarouselPopup = function() {
+    var overlay = document.getElementById('carousel-overlay');
+    if (overlay) overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  window.slideCarousel = function(dir) {
+    if (_carList.length <= 1) return;
+    _carIdx = (_carIdx + dir + _carList.length) % _carList.length;
+    _carUpdate();
+  };
+
+  function _carGoTo(i) {
+    _carIdx = i;
+    _carUpdate();
+  }
+
+  function _carUpdate() {
+    var rail = document.getElementById('carousel-rail');
+    if (!rail) return;
+
+    var slides = rail.querySelectorAll('.carousel-slide');
+    slides.forEach(function(slide, i) {
+      var offset = i - _carIdx;
+      
+      // Handle wrap-around index offsets to keep neighboring slides visible
+      var total = slides.length;
+      if (total > 2) {
+        if (offset < -total / 2) offset += total;
+        if (offset > total / 2) offset -= total;
+      }
+
+      var transformStr = '';
+      var zIndexVal = 0;
+      var opacityVal = 1;
+      var filterVal = 'none';
+
+      if (offset === 0) {
+        // Active Center Card
+        transformStr = 'translateX(0px) translateZ(160px) rotateY(0deg) scale(1)';
+        zIndexVal = 10;
+        opacityVal = 1;
+        filterVal = 'none';
+      } else if (offset > 0) {
+        // Curved Right Cards
+        var factor = Math.min(offset, 3);
+        var tx = factor * 130 + 100;
+        var tz = -factor * 120;
+        var ry = -45;
+        transformStr = 'translateX(' + tx + 'px) translateZ(' + tz + 'px) rotateY(' + ry + 'deg) scale(0.85)';
+        zIndexVal = 10 - factor;
+        opacityVal = offset > 2 ? 0 : 0.65;
+        filterVal = 'brightness(0.5) blur(1px)';
+      } else {
+        // Curved Left Cards
+        var factor = Math.min(Math.abs(offset), 3);
+        var tx = -(factor * 130 + 100);
+        var tz = -factor * 120;
+        var ry = 40;
+        transformStr = 'translateX(' + tx + 'px) translateZ(' + tz + 'px) rotateY(' + ry + 'deg) scale(0.85)';
+        zIndexVal = 10 - factor;
+        opacityVal = Math.abs(offset) > 2 ? 0 : 0.65;
+        filterVal = 'brightness(0.5) blur(1px)';
+      }
+
+      slide.style.transform = transformStr;
+      slide.style.zIndex = zIndexVal;
+      slide.style.opacity = opacityVal;
+      slide.style.filter = filterVal;
+      slide.style.pointerEvents = (offset === 0) ? 'auto' : 'none';
+    });
+
+    // Update Dots
+    document.getElementById('carousel-dots') && document.getElementById('carousel-dots').querySelectorAll('.carousel-dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === _carIdx);
+    });
+  }
+
+  // ── Bind click on all [data-admin-img] images ─────────────────────────────
+  // Called after every route switch so newly visible images get bound too
+  function bindImageClicks() {
+    document.querySelectorAll('[data-admin-img]').forEach(function(img) {
+      if (img.dataset.clickBound) return;
+      img.dataset.clickBound = '1';
+
+      // Figure out a nice title from nearby heading
+      var label = '';
+      var ancestor = img.closest('.bento-card, .prop-detail, .property-card, .feature-visual, .hero-inner, section');
+      if (ancestor) {
+        var h = ancestor.querySelector('h1,h2,h3');
+        if (h) label = h.textContent.trim().split('\n')[0].trim();
+      }
+      if (!label) label = img.alt || 'Gallery';
+
+      var key = img.getAttribute('data-admin-img');
+      img.style.cursor = 'pointer';
+
+      img.addEventListener('click', function(e) {
+        e.stopPropagation();
+        openCarouselPopup(key, label);
+      });
+    });
+  }
+
+  // ── SPA Router ────────────────────────────────────────────────────────────
+  function routeSPA() {
+    var hash = (location.hash || '#home').replace('#','').toLowerCase();
+    // support double-hash anchors like #properties#garden
+    var parts = hash.split('#');
+    var viewKey = parts[0] || 'home';
+    var anchor  = parts[1] || '';
+
+    var matched = false;
+    document.querySelectorAll('.app-view').forEach(function(view) {
+      var isTarget = view.id === (viewKey + '-view');
+      view.classList.toggle('active', isTarget);
+      if (isTarget) matched = true;
+    });
+    if (!matched) {
+      var hw = document.getElementById('home-view');
+      if (hw) hw.classList.add('active');
+      viewKey = 'home';
+    }
+
+    // nav active state
+    document.querySelectorAll('[data-nav]').forEach(function(a) {
+      var k = (a.getAttribute('data-nav') || '').replace('.html','').replace('index','home').toLowerCase();
+      a.classList.toggle('is-active', k === viewKey);
+    });
+
+    // scroll
+    if (anchor) {
+      setTimeout(function() {
+        var el = document.getElementById(anchor);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+        else window.scrollTo(0, 0);
+      }, 60);
+    } else {
+      window.scrollTo(0, 0);
+    }
+
+    // Rebind image clicks (newly visible images in this view)
+    syncHomePageProperties();
+    renderPropertiesPage();
+    renderGalleryPage();
+    applyImageOverrides();
+    bindImageClicks();
+  }
+
+  window.addEventListener('hashchange', routeSPA);
+
+  // Close carousel with Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeCarouselPopup();
+  });
+
+  // Touch swipe support for carousel (deferred until DOM fully ready)
+  document.addEventListener('DOMContentLoaded', function() {
+    var startX = 0;
+    var vp = document.getElementById('carousel-rail');
+    if (!vp) return;
+    vp.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+    vp.addEventListener('touchend', function(e) {
+      var diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) slideCarousel(diff > 0 ? 1 : -1);
+    }, { passive: true });
+  });
+
+  safeStorage.init(function() {
+    routeSPA();
+  });
+
+</script>
+
+  <!-- Glassmorphic Multi-Image 3D Popup Gallery -->
+  <div class="carousel-overlay" id="carousel-overlay" onclick="closeCarouselPopup()">
+    <div class="carousel-card" onclick="event.stopPropagation()">
+      <div class="carousel-header">
+        <h3 id="carousel-title">Gallery</h3>
+        <button class="carousel-close" onclick="closeCarouselPopup()">&times;</button>
+      </div>
+      <div class="carousel-viewport">
+        <button class="carousel-nav-btn prev" onclick="slideCarousel(-1)" aria-label="Previous image">
+          <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="carousel-nav-btn next" onclick="slideCarousel(1)" aria-label="Next image">
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+        <div class="carousel-rail" id="carousel-rail"></div>
+      </div>
+      <div class="carousel-dots" id="carousel-dots"></div>
+    </div>
+  </div>
+
+</body>
+</html>

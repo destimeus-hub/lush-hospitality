@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lush Hospitality | Image Control Panel</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+    
+    :root {
+      --bg: #0b0a09;
+      --bg-2: #12100e;
+      --surface: #161310;
+      --fg: #f7f1e8;
+      --muted: #9a9084;
+      --accent: #c9a46a;
+      --accent-2: #e4c896;
+      --border: rgba(247,241,232,0.1);
+      --border-strong: rgba(247,241,232,0.2);
+      --danger: #d4746a;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-body);
+      padding: 2.5rem 1.5rem;
+      line-height: 1.6;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-strong);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    h1 { font-size: 1.75rem; font-weight: 600; letter-spacing: -0.02em; }
+    h1 span { color: var(--accent); font-weight: 400; }
+
+    .btn-global-reset {
+      background: transparent;
+      border: 1px solid var(--border-strong);
+      color: var(--fg);
+      padding: 0.65rem 1.25rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .btn-global-reset:hover { background: rgba(255,255,255,0.05); border-color: var(--accent); }
+
+    .section-group { margin-bottom: 3.5rem; }
+
+    .section-title {
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-2);
+      margin-bottom: 1.5rem;
+      border-left: 2px solid var(--accent);
+      padding-left: 0.75rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      transition: border-color 0.3s;
+    }
+    .card:hover { border-color: var(--border-strong); }
+
+    .card-title { font-size: 0.9rem; font-weight: 600; color: var(--fg); }
+
+    .preview-box {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--bg-2);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .preview-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    
+    .card-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 5px;
+    }
+    .card-input-group label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-top: 4px;
+    }
+    .card-input-group input, .card-input-group select {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      color: var(--fg);
+      padding: 6px 8px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      outline: none;
+      width: 100%;
+    }
+    .card-input-group input:focus, .card-input-group select:focus {
+      border-color: var(--accent);
+    }
+    
+    .empty-preview {
+      width: 100%;
+      height: 100%;
+      background: var(--bg-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+      border: 1.5px dashed var(--border-strong);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+    
+    /* Plus card for adding gallery items */
+    .card-plus {
+      background: transparent;
+      border: 2px dashed rgba(201,164,106,0.3);
+      border-radius: 16px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      cursor: pointer;
+      min-height: 250px;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .card-plus:hover {
+      background: rgba(201,164,106,0.05);
+      border-color: var(--accent);
+    }
+    .card-plus svg {
+      width: 48px;
+      height: 48px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 1.5;
+    }
+    .card-plus span {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--accent-2);
+    }
+
+    .thumbs-row {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent) transparent;
+      min-height: 50px;
+      align-items: center;
+    }
+    .thumbs-row::-webkit-scrollbar { height: 3px; }
+    .thumbs-row::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 999px; }
+
+    .thumb {
+      position: relative;
+      width: 58px;
+      height: 44px;
+      flex-shrink: 0;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1.5px solid var(--border);
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .thumb.active { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(201,164,106,0.3); }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .thumb-del {
+      position: absolute;
+      top: 2px; right: 2px;
+      width: 15px; height: 15px;
+      border-radius: 50%;
+      background: rgba(212,116,106,0.9);
+      border: none;
+      color: #fff;
+      font-size: 10px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transition: background 0.15s;
+    }
+    .thumb-del:hover { background: var(--danger); }
+
+    .no-thumbs {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: auto;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 0.55rem 0.4rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: background 0.2s, color 0.2s;
+      border: none;
+    }
+    .btn-upload { background: var(--accent); color: var(--bg); }
+    .btn-upload:hover { background: var(--accent-2); }
+    .btn-reset { background: transparent; border: 1px solid var(--border-strong); color: var(--fg); }
+    .btn-reset:hover { background: rgba(255,255,255,0.06); }
+
+    /* Single shared hidden file input - not inside cards */
+    #shared-file-input { display: none; }
+  </style>
+</head>
+<body>
+  <input type="file" id="shared-file-input" accept="image/*">
+  <input type="file" id="gallery-file-input" style="display:none;" accept="image/*">
+  <input type="file" id="properties-file-input" style="display:none;" accept="image/*">
+
+  <div class="container">
+    <header>
+      <h1>Lush Hospitality <span>Image Control Panel</span></h1>
+      <div style="display: flex; gap: 0.5rem; align-items: center;">
+        <a href="index.html" target="_blank" class="btn-global-reset" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;" onclick="openLiveSite(event)">View Live Site</a>
+        <button class="btn-global-reset" id="btn-reset-all">Reset All to Defaults</button>
+      </div>
+    </header>
+
+    <main>
+      <div class="section-group">
+        <h2 class="section-title">Home Page</h2>
+        <div class="grid" id="grid-home"></div>
+      </div>
+      <div class="section-group">
+        <h2 class="section-title">Properties Page</h2>
+        <div class="grid" id="grid-properties"></div>
+      </div>
+      <div class="section-group">
+        <h2 class="section-title">Experiences Page</h2>
+        <div class="grid" id="grid-experiences"></div>
+      </div>
+      <div class="section-group">
+        <h2 class="section-title">About Page</h2>
+        <div class="grid" id="grid-about"></div>
+      </div>
+      <div class="section-group">
+        <h2 class="section-title">Gallery Page</h2>
+        <div class="grid" id="grid-gallery"></div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // ── Config ───────────────────────────────────────────────────────────────
+    var imageConfigs = [
+      { id: 'home-hero-bg',      label: 'Hero Background',        category: 'home',        def: 'assets/frames/1.png' },
+      { id: 'intro-md-profile',  label: 'Founder Profile Intro',  category: 'home',        def: 'assets/frames/3.png' },
+      { id: 'bento-garden',      label: 'Lush Garden Bento',      category: 'home',        def: 'assets/frames/2.png' },
+      { id: 'bento-waterview',   label: 'Waterview Bento',        category: 'home',        def: 'assets/frames/5.png' },
+      { id: 'bento-premier',     label: 'Premier Hotel Bento',    category: 'home',        def: 'assets/frames/6.png' },
+      { id: 'bento-cinema',      label: 'GP Cinemas Bento',       category: 'home',        def: 'assets/frames/3.png' },
+      { id: 'bento-miyabi',      label: 'Miyabi Bento',           category: 'home',        def: 'assets/frames/1.png' },
+      { id: 'rail-bar',          label: 'Lush Bar & Cafe Rail',   category: 'home',        def: 'assets/frames/2.png' },
+      { id: 'rail-360',          label: '360 By Lush Rail',       category: 'home',        def: 'assets/frames/5.png' },
+      { id: 'rail-boutique',     label: 'Boutique Hotel Rail',    category: 'home',        def: 'assets/frames/6.png' },
+      { id: 'rail-catering',     label: 'Catering Rail',          category: 'home',        def: 'assets/frames/3.png' },
+
+      { id: 'decor-floral-img',  label: 'Luxury Floral Decor',    category: 'experiences', def: 'assets/frames/2.png' },
+      { id: 'decor-banquet-img', label: 'Banquet Lighting Decor', category: 'experiences', def: 'assets/frames/5.png' },
+      { id: 'decor-table-img',   label: 'Table Setting Decor',    category: 'experiences', def: 'assets/frames/6.png' },
+
+      { id: 'about-visual-img',  label: 'About Story Visual',     category: 'about',       def: 'assets/frames/6.png' }
+    ];
+
+    // ── Safe Storage Wrapper (IndexedDB Backend with Sync Cache fallback) ─────
+    var safeStorage = {
+      _cache: {},
+      _db: null,
+      init: function(callback) {
+        var self = this;
+        if (!window.indexedDB) {
+          try {
+            for (var key in localStorage) {
+              if (localStorage.hasOwnProperty(key)) {
+                self._cache[key] = localStorage.getItem(key);
+              }
+            }
+          } catch(e) {}
+          callback();
+          return;
+        }
+
+        var request = indexedDB.open("LushHospitalityDB", 1);
+        request.onupgradeneeded = function(e) {
+          var db = e.target.result;
+          if (!db.objectStoreNames.contains("settings")) {
+            db.createObjectStore("settings");
+          }
+        };
+        request.onsuccess = function(e) {
+          self._db = e.target.result;
+          var tx = self._db.transaction("settings", "readonly");
+          var store = tx.objectStore("settings");
+          
+          if (store.getAllKeys && store.getAll) {
+            var keysReq = store.getAllKeys();
+            keysReq.onsuccess = function() {
+              var valsReq = store.getAll();
+              valsReq.onsuccess = function() {
+                var keys = keysReq.result;
+                var vals = valsReq.result;
+                for (var i = 0; i < keys.length; i++) {
+                  self._cache[keys[i]] = vals[i];
+                }
+                callback();
+              };
+            };
+          } else {
+            var cursorReq = store.openCursor();
+            cursorReq.onsuccess = function(event) {
+              var cursor = event.target.result;
+              if (cursor) {
+                self._cache[cursor.key] = cursor.value;
+                cursor.continue();
+              } else {
+                callback();
+              }
+            };
+          }
+        };
+        request.onerror = function() {
+          try {
+            for (var key in localStorage) {
+              if (localStorage.hasOwnProperty(key)) {
+                self._cache[key] = localStorage.getItem(key);
+              }
+            }
+          } catch(e) {}
+          callback();
+        };
+      },
+      getItem: function(key) {
+        return this._cache[key] || null;
+      },
+      setItem: function(key, val) {
+        this._cache[key] = val;
+        var self = this;
+        
+        // Background async write to IndexedDB (unlimited size limit)
+        if (self._db) {
+          try {
+            var tx = self._db.transaction("settings", "readwrite");
+            var store = tx.objectStore("settings");
+            store.put(val, key);
+          } catch(e) {
+            console.error("IndexedDB write error:", e);
+          }
+        }
+        
+        // Sync write to localStorage for redundancy (catches quota exceeds quietly)
+        try {
+          localStorage.setItem(key, val);
+        } catch(e) {}
+        
+        return true;
+      },
+      removeItem: function(key) {
+        delete this._cache[key];
+        var self = this;
+        try {
+          localStorage.removeItem(key);
+        } catch(e) {}
+        if (self._db) {
+          try {
+            var tx = self._db.transaction("settings", "readwrite");
+            var store = tx.objectStore("settings");
+            store.delete(key);
+          } catch(e) {
+            console.error("IndexedDB delete error:", e);
+          }
+        }
+        return true;
+      }
+    };
+
+    function getList(id, def) {
+      var raw = safeStorage.getItem('lush_img_' + id);
+      if (!raw) return null; // null = no custom images yet
+      try {
+        var parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      } catch(e) {}
+      return [raw]; // legacy single string
+    }
+
+    // In-memory draft: staged changes before Save is clicked
+    var staticImagesDraft = {};
+
+    function ensureSlotDraft(cfg) {
+      if (!staticImagesDraft[cfg.id]) {
+        var saved = getList(cfg.id, cfg.def);
+        staticImagesDraft[cfg.id] = saved ? saved.slice() : [cfg.def];
+      }
+    }
+
+    var childWindow = null;
+
+    function openLiveSite(e) {
+      e.preventDefault();
+      childWindow = window.open('index.html', 'lush_live_site');
+      if (childWindow) childWindow.focus();
+    }
+
+    function notifyOpener() {
+      if (window.opener) {
+        try {
+          window.opener.postMessage('update-images', '*');
+        } catch(e) {}
+      }
+      if (childWindow) {
+        try {
+          childWindow.postMessage('update-images', '*');
+        } catch(e) {}
+      }
+    }
+
+    window.addEventListener('message', function(e) {
+      if (e.data === 'register-child') {
+        childWindow = e.source;
+        notifyOpener();
+      }
+    });
+
+    function saveList(id, arr) {
+      if (!arr || arr.length === 0) {
+        safeStorage.removeItem('lush_img_' + id);
+      } else {
+        safeStorage.setItem('lush_img_' + id, JSON.stringify(arr));
+      }
+      notifyOpener();
+    }
+
+    // ── Active slot tracking (for shared file input) ─────────────────────────
+    var activeSlotId = null;
+
+    var fileInput = document.getElementById('shared-file-input');
+
+    fileInput.addEventListener('change', function() {
+      var file = fileInput.files[0];
+      if (!file || !activeSlotId) {
+        fileInput.value = '';
+        return;
+      }
+
+      var slotId = activeSlotId; // capture before async
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var base64 = e.target.result;
+        var list = staticImagesDraft[slotId];
+        var cfg = imageConfigs.find(function(c) { return c.id === slotId; });
+        ensureSlotDraft(cfg);
+        var existingList = staticImagesDraft[slotId];
+        if (existingList.length === 1 && existingList[0] === cfg.def) {
+          staticImagesDraft[slotId] = [base64];
+        } else {
+          staticImagesDraft[slotId].push(base64);
+        }
+        renderPanel();
+        fileInput.value = ''; // allow re-picking same file
+      };
+      reader.readAsDataURL(file);
+    });
+
+    // ── Render ───────────────────────────────────────────────────────────────
+    function renderPanel() {
+      ['home','properties','experiences','about','gallery'].forEach(function(cat) {
+        var g = document.getElementById('grid-' + cat);
+        if (g) g.innerHTML = '';
+      });
+
+      imageConfigs.forEach(function(cfg) {
+        var grid = document.getElementById('grid-' + cfg.category);
+        if (!grid) return;
+
+        ensureSlotDraft(cfg);
+        var displayList = staticImagesDraft[cfg.id];
+        var isCustom = (displayList.length > 0 && displayList[0] !== cfg.def);
+
+        // Build card element (not innerHTML for the interactive parts)
+        var card = document.createElement('div');
+        card.className = 'card';
+
+        // Title
+        var titleEl = document.createElement('div');
+        titleEl.className = 'card-title';
+        titleEl.textContent = cfg.label;
+        card.appendChild(titleEl);
+
+        // Preview box
+        var previewBox = document.createElement('div');
+        previewBox.className = 'preview-box';
+        
+        if (isCustom) {
+          var previewImg = document.createElement('img');
+          previewImg.src = displayList[0];
+          previewImg.alt = cfg.label;
+          previewImg.id = 'preview-' + cfg.id;
+          previewBox.appendChild(previewImg);
+        } else {
+          var emptyPreview = document.createElement('div');
+          emptyPreview.className = 'empty-preview';
+          emptyPreview.id = 'preview-' + cfg.id;
+          emptyPreview.textContent = 'Empty / No image uploaded';
+          previewBox.appendChild(emptyPreview);
+        }
+        card.appendChild(previewBox);
+
+        // Thumbnails row
+        var thumbsRow = document.createElement('div');
+        thumbsRow.className = 'thumbs-row';
+        thumbsRow.id = 'thumbs-' + cfg.id;
+
+        if (displayList.length === 0) {
+          var noThumb = document.createElement('span');
+          noThumb.className = 'no-thumbs';
+          noThumb.textContent = 'No images yet';
+          thumbsRow.appendChild(noThumb);
+        } else {
+          displayList.forEach(function(src, idx) {
+            var thumb = document.createElement('div');
+            thumb.className = 'thumb' + (idx === 0 ? ' active' : '');
+
+            var tImg = document.createElement('img');
+            tImg.src = src;
+            tImg.alt = 'Thumb ' + (idx + 1);
+            thumb.appendChild(tImg);
+
+            // Select thumb (closure-safe with IIFE)
+            (function(capturedIdx, capturedId) {
+              thumb.addEventListener('click', function() {
+                selectThumb(capturedId, capturedIdx);
+              });
+
+              // Delete button
+              if (isCustom || displayList.length > 1) {
+                var del = document.createElement('button');
+                del.className = 'thumb-del';
+                del.textContent = '\u00d7';
+                del.title = 'Remove this image';
+                del.addEventListener('click', function(e) {
+                  e.stopPropagation();
+                  deleteThumb(capturedId, capturedIdx, cfg.def);
+                });
+                thumb.appendChild(del);
+              }
+            })(idx, cfg.id);
+
+            thumbsRow.appendChild(thumb);
+          });
+        }
+        card.appendChild(thumbsRow);
+
+        // Action buttons
+        var actions = document.createElement('div');
+        actions.className = 'actions';
+
+        var uploadBtn = document.createElement('button');
+        uploadBtn.className = 'btn btn-upload';
+        uploadBtn.textContent = 'Add Image';
+
+        // Use closure to safely bind the slot id
+        (function(slotId) {
+          uploadBtn.addEventListener('click', function() {
+            activeSlotId = slotId;
+            fileInput.value = ''; // reset so same file can be picked again
+            fileInput.click();
+          });
+        })(cfg.id);
+
+        var resetBtn = document.createElement('button');
+        resetBtn.className = 'btn btn-reset';
+        resetBtn.textContent = 'Reset';
+
+        (function(slotId) {
+          resetBtn.addEventListener('click', function() {
+            var cfg = imageConfigs.find(function(c) { return c.id === slotId; });
+            staticImagesDraft[slotId] = [cfg.def];
+            renderPanel();
+          });
+        })(cfg.id);
+
+        var saveBtn = document.createElement('button');
+        saveBtn.className = 'btn btn-upload';
+        saveBtn.style.background = 'var(--accent-2)';
+        saveBtn.textContent = 'Save';
+
+        (function(slotId) {
+          saveBtn.addEventListener('click', function() {
+            var list = staticImagesDraft[slotId];
+            var cfg = imageConfigs.find(function(c) { return c.id === slotId; });
+            if (list.length === 1 && list[0] === cfg.def) {
+              safeStorage.removeItem('lush_img_' + slotId);
+            } else {
+              safeStorage.setItem('lush_img_' + slotId, JSON.stringify(list));
+            }
+            notifyOpener();
+            alert('Saved card changes!');
+          });
+        })(cfg.id);
+
+        actions.appendChild(saveBtn);
+        actions.appendChild(uploadBtn);
+        actions.appendChild(resetBtn);
+        card.appendChild(actions);
+
+        grid.appendChild(card);
+      });
+    }
+
+    // ── Select thumbnail (update preview) ────────────────────────────────────
+    function selectThumb(id, idx) {
+      var cfg = imageConfigs.find(function(c) { return c.id === id; });
+      if (!cfg) return;
+
+      var displayList = staticImagesDraft[id] || [cfg.def];
+
+      var previewImg = document.getElementById('preview-' + id);
+      if (previewImg && displayList[idx]) {
+        previewImg.src = displayList[idx];
+      }
+
+      var thumbsRow = document.getElementById('thumbs-' + id);
+      if (thumbsRow) {
+        thumbsRow.querySelectorAll('.thumb').forEach(function(t, i) {
+          t.classList.toggle('active', i === idx);
+        });
+      }
+    }
+
+    // ── Delete a specific thumbnail ──────────────────────────────────────────
+    function deleteThumb(id, idx, def) {
+          if (staticImagesDraft[id]) {
+            staticImagesDraft[id].splice(idx, 1);
+            if (staticImagesDraft[id].length === 0) {
+              var cfg2 = imageConfigs.find(function(c) { return c.id === id; });
+              staticImagesDraft[id] = cfg2 ? [cfg2.def] : [];
+            }
+            renderPanel();
+          }
+    }
+
+    // ── Global reset ─────────────────────────────────────────────────────────
+    document.getElementById('btn-reset-all').addEventListener('click', function() {
+      if (!confirm('Reset ALL images and dynamic contents to defaults? This cannot be undone.')) return;
+      imageConfigs.forEach(function(cfg) {
+        safeStorage.removeItem('lush_img_' + cfg.id);
+      });
+      safeStorage.removeItem('lush_gallery_items');
+      safeStorage.removeItem('lush_properties_items');
+      staticImagesDraft = {};
+      renderPanel();
+      renderGallerySection();
+      renderPropertiesSection();
+      notifyOpener();
+    });
+
+    // ── Gallery Custom Logic ──────────────────────────────────────────────────
+    var defaultGallery = [
+      { id: 'gallery-1', image: '', tag: 'Lounge & Dining', title: 'Artistic Spaces', aspect: 'landscape' },
+      { id: 'gallery-2', image: '', tag: 'Nature Cozy', title: 'Verdant Corners', aspect: 'portrait' },
+      { id: 'gallery-3', image: '', tag: 'Aesthetics', title: 'Modern Lounge', aspect: 'landscape' },
+      { id: 'gallery-4', image: '', tag: 'Culinary Craft', title: 'Fine Presentation', aspect: 'portrait' },
+      { id: 'gallery-5', image: '', tag: 'Boutique Detail', title: 'Architectural Comfort', aspect: 'landscape' },
+      { id: 'gallery-6', image: '', tag: 'Lounge Vibes', title: 'Premium Settings', aspect: 'portrait' },
+      { id: 'gallery-7', image: '', tag: 'Amphitheater', title: 'Outdoor Gardens', aspect: 'landscape' },
+      { id: 'gallery-8', image: '', tag: 'Grand Hall', title: 'Signature Lush Hospitality', aspect: 'landscape' }
+    ];
+
+    var galleryFileInput = document.getElementById('gallery-file-input');
+    var activeGalleryIdx = null;
+
+    galleryFileInput.addEventListener('change', function() {
+      var file = galleryFileInput.files[0];
+      if (!file || activeGalleryIdx === null) {
+        galleryFileInput.value = '';
+        return;
+      }
+
+      var idx = activeGalleryIdx;
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var base64 = e.target.result;
+        var raw = safeStorage.getItem('lush_gallery_items');
+        var items = [];
+        if (raw) {
+          try { items = JSON.parse(raw); } catch(err) { items = defaultGallery.slice(); }
+        } else { items = defaultGallery.slice(); }
+
+        if (items[idx]) {
+          items[idx].image = base64;
+          safeStorage.setItem('lush_gallery_items', JSON.stringify(items));
+          renderGallerySection();
+          notifyOpener();
+        }
+        galleryFileInput.value = '';
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function renderGallerySection() {
+      var grid = document.getElementById('grid-gallery');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      var raw = safeStorage.getItem('lush_gallery_items');
+      var items = [];
+      if (raw) {
+        try {
+          items = JSON.parse(raw);
+        } catch(e) {
+          items = defaultGallery;
+        }
+      } else {
+        items = defaultGallery;
+      }
+
+      items.forEach(function(item, idx) {
+        var card = document.createElement('div');
+        card.className = 'card';
+        if (item.hidden) card.style.opacity = '0.45';
+
+        var titleEl = document.createElement('div');
+        titleEl.className = 'card-title';
+        titleEl.textContent = 'Gallery Item #' + (idx + 1) + (item.hidden ? ' — HIDDEN' : '');
+        card.appendChild(titleEl);
+
+        var previewBox = document.createElement('div');
+        previewBox.className = 'preview-box';
+        
+        if (item.image) {
+          var img = document.createElement('img');
+          img.src = item.image;
+          img.alt = item.title;
+          previewBox.appendChild(img);
+        } else {
+          var empty = document.createElement('div');
+          empty.className = 'empty-preview';
+          empty.textContent = 'Empty / Click Change Photo';
+          previewBox.appendChild(empty);
+        }
+        card.appendChild(previewBox);
+
+        var inputsDiv = document.createElement('div');
+        inputsDiv.className = 'card-input-group';
+
+        var labelTag = document.createElement('label');
+        labelTag.textContent = 'Item Tag (Name)';
+        var inputTag = document.createElement('input');
+        inputTag.type = 'text';
+        inputTag.value = item.tag || '';
+        inputTag.placeholder = 'e.g. Lounge & Dining';
+        inputTag.addEventListener('input', function() {
+          items[idx].tag = inputTag.value;
+        });
+        inputsDiv.appendChild(labelTag);
+        inputsDiv.appendChild(inputTag);
+
+        var labelTitle = document.createElement('label');
+        labelTitle.textContent = 'Item Title (Caption)';
+        var inputTitle = document.createElement('input');
+        inputTitle.type = 'text';
+        inputTitle.value = item.title || '';
+        inputTitle.placeholder = 'e.g. Artistic Spaces';
+        inputTitle.addEventListener('input', function() {
+          items[idx].title = inputTitle.value;
+        });
+        inputsDiv.appendChild(labelTitle);
+        inputsDiv.appendChild(inputTitle);
+
+        var labelAspect = document.createElement('label');
+        labelAspect.textContent = 'Layout Aspect';
+        var selectAspect = document.createElement('select');
+        
+        var optL = document.createElement('option');
+        optL.value = 'landscape';
+        optL.textContent = 'Landscape (Wide)';
+        optL.selected = (item.aspect || 'landscape') === 'landscape';
+        selectAspect.appendChild(optL);
+
+        var optP = document.createElement('option');
+        optP.value = 'portrait';
+        optP.textContent = 'Portrait (Tall)';
+        optP.selected = item.aspect === 'portrait';
+        selectAspect.appendChild(optP);
+
+        selectAspect.addEventListener('change', function() {
+          items[idx].aspect = selectAspect.value;
+        });
+        inputsDiv.appendChild(labelAspect);
+        inputsDiv.appendChild(selectAspect);
+
+        card.appendChild(inputsDiv);
+
+        // ── Action row 1: Save + Change Photo
+        var actions1 = document.createElement('div');
+        actions1.className = 'actions';
+        actions1.style.marginTop = '0.75rem';
+
+        var saveBtn = document.createElement('button');
+        saveBtn.className = 'btn btn-upload';
+        saveBtn.style.background = '#5a8a5a';
+        saveBtn.textContent = 'Save';
+        saveBtn.addEventListener('click', function() {
+          items[idx].tag = inputTag.value;
+          items[idx].title = inputTitle.value;
+          items[idx].aspect = selectAspect.value;
+          safeStorage.setItem('lush_gallery_items', JSON.stringify(items));
+          notifyOpener();
+          saveBtn.textContent = 'Saved ✓';
+          setTimeout(function() { saveBtn.textContent = 'Save'; }, 1500);
+        });
+
+        var uploadBtn = document.createElement('button');
+        uploadBtn.className = 'btn btn-upload';
+        uploadBtn.textContent = 'Change Photo';
+        uploadBtn.addEventListener('click', function() {
+          activeGalleryIdx = idx;
+          activeSlotId = null;
+          galleryFileInput.value = '';
+          galleryFileInput.click();
+        });
+
+        actions1.appendChild(saveBtn);
+        actions1.appendChild(uploadBtn);
+        card.appendChild(actions1);
+
+        // ── Action row 2: Hide + Delete
+        var actions2 = document.createElement('div');
+        actions2.className = 'actions';
+
+        var hideBtn = document.createElement('button');
+        hideBtn.className = 'btn btn-reset';
+        hideBtn.textContent = item.hidden ? 'Show' : 'Hide';
+        hideBtn.style.color = item.hidden ? '#7dbf8a' : 'var(--accent-2)';
+        hideBtn.addEventListener('click', function() {
+          items[idx].hidden = !items[idx].hidden;
+          safeStorage.setItem('lush_gallery_items', JSON.stringify(items));
+          renderGallerySection();
+          notifyOpener();
+        });
+
+        var deleteBtn = document.createElement('button');
+        deleteBtn.className = 'btn btn-reset';
+        deleteBtn.style.color = 'var(--danger)';
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.addEventListener('click', function() {
+          if (!confirm('Permanently delete this gallery item?')) return;
+          items.splice(idx, 1);
+          safeStorage.setItem('lush_gallery_items', JSON.stringify(items));
+          renderGallerySection();
+          notifyOpener();
+        });
+
+        actions2.appendChild(hideBtn);
+        actions2.appendChild(deleteBtn);
+        card.appendChild(actions2);
+
+        grid.appendChild(card);
+      });
+
+      var plusCard = document.createElement('div');
+      plusCard.className = 'card-plus';
+      plusCard.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add New Photo</span>';
+      plusCard.addEventListener('click', function() {
+        var newItem = {
+          id: 'gal-dynamic-' + Date.now(),
+          image: '',
+          tag: 'New Tag',
+          title: 'New Caption',
+          aspect: 'landscape'
+        };
+        items.push(newItem);
+        safeStorage.setItem('lush_gallery_items', JSON.stringify(items));
+        renderGallerySection();
+        notifyOpener();
+      });
+      grid.appendChild(plusCard);
+    }
+
+    // ── Properties Custom Logic ───────────────────────────────────────────────
+    var defaultProperties = [
+      { id: 'prop-1', image: '', tag: 'Amphitheater & Café', title: 'Lush Garden & Cafe', desc: 'A serene, eco-conscious space dedicated to harmony with nature. At its heart: a stunning amphitheater surrounded by greenery, a musical fountain, and globally inspired comfort food in a tranquil green setting.', link: '#reserve', btnText: 'Book this space' },
+      { id: 'prop-2', image: '', tag: 'Fine Dining', title: 'Waterview', desc: 'A premium fine dining destination blending Indian culinary tradition with a fountain-facing setting. Nestled in a prime location — every detail curated for comfort, flavor, and ambiance.', link: '#reserve', btnText: 'Reserve a table' },
+      { id: 'prop-3', image: '', tag: 'Rooftop Elegance', title: 'Lush Bar & Cafe', desc: 'A rooftop expression of Lush’s signature elegance. Curated cocktails and global comfort food where music gently fills the air — for casual gatherings and spirited evenings alike.', link: '#reserve', btnText: 'Plan an evening' },
+      { id: 'prop-4', image: '', tag: 'Private Lounge', title: 'Miyabi', desc: 'A refined private party space for intimate celebrations. By day: a quiet corner for curated gatherings. By night: club-like energy — classy affairs, great music, flowing drinks.', link: '#reserve', btnText: 'Host at Miyabi' },
+      { id: 'prop-5', image: '', tag: '360° Views', title: '360° By Lush', desc: 'Rooftop views, great food, better vibes. From palm trees to metro lines — chill hangouts or private celebrations with greenery and effortless style.', link: '#reserve', btnText: 'Book 360°' },
+      { id: 'prop-6', image: '', tag: 'Luxury Hotel', title: 'Lush Premier Hotel', desc: 'Striking design with warm comfort. From façade to elegantly styled rooms — vibrant bars, cozy lounges, and spacious banquet halls. In the city’s heart, every occasion becomes memorable.', link: '#reserve', btnText: 'Reserve a suite' },
+      { id: 'prop-7', image: '', tag: 'Bespoke Boutique', title: 'Lush Boutique Hotel', desc: 'What completes the experience is people — team and guests. Spaces that feel like home: thoughtful layouts, calming ambience, attentive service. Relationships, not just reservations.', link: '#reserve', btnText: 'Stay boutique' },
+      { id: 'prop-8', image: '', tag: 'Cinematic Heartbeat', title: 'GP Cinemas (Gurdev Palace)', desc: 'It began in 1983 — not just bricks and screens, but a dream that became Kanpur’s cinematic heartbeat. From jungle to skyline, lone landmark to living legacy. Even the metro station carries its name.', link: '#experiences#cinema', btnText: 'Cinema experiences' },
+      { id: 'prop-9', image: '', tag: 'Bespoke Catering', title: 'Luxury Line Culinary Services', desc: 'Upscale outdoor catering where a specially curated menu meets modern presentation. Lavish flavors crafted live by master chefs for remarkable celebrations.', link: '#reserve', btnText: 'Inquire catering' }
+    ];
+
+    // ── Image Compressor to prevent QuotaExceededError ───────────────────────
+    function compressImage(base64, callback) {
+      var img = new Image();
+      img.onload = function() {
+        var canvas = document.createElement('canvas');
+        var ctx = canvas.getContext('2d');
+        var maxDim = 800; // optimized size for fast loads and small storage
+        var width = img.width;
+        var height = img.height;
+        if (width > maxDim || height > maxDim) {
+          if (width > height) {
+            height = Math.round((height * maxDim) / width);
+            width = maxDim;
+          } else {
+            width = Math.round((width * maxDim) / height);
+            height = maxDim;
+          }
+        }
+        canvas.width = width;
+        canvas.height = height;
+        ctx.drawImage(img, 0, 0, width, height);
+        // Compress as JPEG at 0.60 quality (visually excellent, files are only 40-70KB)
+        callback(canvas.toDataURL('image/jpeg', 0.60));
+      };
+      img.onerror = function() { callback(base64); };
+      img.src = base64;
+    }
+
+    var propertiesFileInput = document.getElementById('properties-file-input');
+    var activePropertiesIdx = null;
+
+    propertiesFileInput.addEventListener('change', function() {
+      var file = propertiesFileInput.files[0];
+      if (!file || activePropertiesIdx === null) {
+        propertiesFileInput.value = '';
+        return;
+      }
+
+      var idx = activePropertiesIdx;
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var originalBase64 = e.target.result;
+        
+        compressImage(originalBase64, function(compressedBase64) {
+          var raw = safeStorage.getItem('lush_properties_items');
+          var items = [];
+          if (raw) {
+            try { items = JSON.parse(raw); } catch(err) { items = defaultProperties.slice(); }
+          } else { items = defaultProperties.slice(); }
+
+          if (items[idx]) {
+            // Ensure dynamic array exists
+            if (!items[idx].images) {
+              items[idx].images = items[idx].image ? [items[idx].image] : [];
+            }
+            items[idx].images.push(compressedBase64);
+            // Default main property picture is the first thumbnail
+            items[idx].image = items[idx].images[0];
+            
+            safeStorage.setItem('lush_properties_items', JSON.stringify(items));
+            renderPropertiesSection();
+            notifyOpener();
+          }
+          propertiesFileInput.value = '';
+        });
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function renderPropertiesSection() {
+      var grid = document.getElementById('grid-properties');
+      if (!grid) return;
+
+      var raw = safeStorage.getItem('lush_properties_items');
+      var items = [];
+      if (raw) {
+        try {
+          items = JSON.parse(raw);
+        } catch(e) {
+          items = defaultProperties.slice();
+        }
+      } else {
+        items = defaultProperties.slice();
+      }
+
+      grid.innerHTML = '';
+
+      items.forEach(function(item, idx) {
+        var card = document.createElement('div');
+        card.className = 'card';
+        if (item.hidden) card.style.opacity = '0.45';
+
+        // Title
+        var cardTitle = document.createElement('div');
+        cardTitle.className = 'card-title';
+        cardTitle.style.display = 'flex';
+        cardTitle.style.flexDirection = 'column';
+        cardTitle.style.gap = '0.4rem';
+
+        if (item.hidden) {
+          var hiddenBadge = document.createElement('span');
+          hiddenBadge.textContent = 'HIDDEN';
+          hiddenBadge.style.cssText = 'font-size:0.65rem;background:rgba(255,150,50,0.2);color:#f4a261;border-radius:999px;padding:2px 8px;width:fit-content;';
+          cardTitle.appendChild(hiddenBadge);
+        }
+
+        var tagLabel = document.createElement('span');
+        tagLabel.className = 'card-category';
+        tagLabel.textContent = 'Tag';
+        cardTitle.appendChild(tagLabel);
+
+        var tagInput = document.createElement('input');
+        tagInput.type = 'text';
+        tagInput.value = item.tag || '';
+        tagInput.className = 'caption-input';
+        tagInput.placeholder = 'e.g. Amphitheater & Café';
+        tagInput.addEventListener('input', function() { item.tag = tagInput.value; });
+        cardTitle.appendChild(tagInput);
+
+        var nameLabel = document.createElement('span');
+        nameLabel.className = 'card-category';
+        nameLabel.textContent = 'Name';
+        cardTitle.appendChild(nameLabel);
+
+        var titleInput = document.createElement('input');
+        titleInput.type = 'text';
+        titleInput.value = item.title || '';
+        titleInput.className = 'caption-input';
+        titleInput.style.fontWeight = 'bold';
+        titleInput.placeholder = 'e.g. Lush Garden & Cafe';
+        titleInput.addEventListener('input', function() { item.title = titleInput.value; });
+        cardTitle.appendChild(titleInput);
+        card.appendChild(cardTitle);
+
+        // Preview container
+        var preview = document.createElement('div');
+        preview.className = 'preview-box';
+        var img = document.createElement('img');
+        img.id = 'prop-preview-' + idx;
+        
+        // Find visible image list
+        var propImages = item.images || (item.image ? [item.image] : []);
+        var currentActiveSrc = propImages[0] || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" style="background:%23161310;"><rect width="300" height="200" fill="%23161310"/><text x="50%" y="50%" fill="%234a4136" font-family="sans-serif" font-weight="600" font-size="13" dominant-baseline="middle" text-anchor="middle">NO IMAGE</text></svg>';
+        
+        img.src = currentActiveSrc;
+        img.alt = item.title || 'Property';
+        if (!propImages.length) img.style.backgroundColor = '#161310';
+        preview.appendChild(img);
+        card.appendChild(preview);
+
+        // Thumbnails Row
+        var thumbsRow = document.createElement('div');
+        thumbsRow.className = 'thumbs-row';
+        thumbsRow.id = 'prop-thumbs-' + idx;
+
+        if (propImages.length === 0) {
+          var noThumb = document.createElement('span');
+          noThumb.className = 'no-thumbs';
+          noThumb.textContent = 'No images yet';
+          thumbsRow.appendChild(noThumb);
+        } else {
+          propImages.forEach(function(src, tIdx) {
+            var thumb = document.createElement('div');
+            thumb.className = 'thumb' + (tIdx === 0 ? ' active' : '');
+
+            var tImg = document.createElement('img');
+            tImg.src = src;
+            tImg.alt = 'Thumb ' + (tIdx + 1);
+            thumb.appendChild(tImg);
+
+            // Select thumb
+            thumb.addEventListener('click', function() {
+              img.src = src;
+              thumbsRow.querySelectorAll('.thumb').forEach(function(t, currI) {
+                t.classList.toggle('active', currI === tIdx);
+              });
+            });
+
+            // Delete specific thumb
+            var del = document.createElement('button');
+            del.className = 'thumb-del';
+            del.textContent = '\u00d7';
+            del.title = 'Remove this image';
+            del.addEventListener('click', function(e) {
+              e.stopPropagation();
+              items[idx].images = propImages.filter(function(_, fi) { return fi !== tIdx; });
+              if (items[idx].images.length > 0) {
+                items[idx].image = items[idx].images[0];
+              } else {
+                items[idx].image = '';
+              }
+              safeStorage.setItem('lush_properties_items', JSON.stringify(items));
+              renderPropertiesSection();
+              notifyOpener();
+            });
+            thumb.appendChild(del);
+
+            thumbsRow.appendChild(thumb);
+          });
+        }
+        card.appendChild(thumbsRow);
+
+        // Description
+        var descLabel = document.createElement('div');
+        descLabel.className = 'card-category';
+        descLabel.textContent = 'Description';
+        descLabel.style.marginTop = '0.5rem';
+        card.appendChild(descLabel);
+
+        var descTextarea = document.createElement('textarea');
+        descTextarea.className = 'caption-input';
+        descTextarea.style.height = '60px';
+        descTextarea.style.resize = 'vertical';
+        descTextarea.value = item.desc || '';
+        descTextarea.placeholder = 'Property description...';
+        descTextarea.addEventListener('input', function() { item.desc = descTextarea.value; });
+        card.appendChild(descTextarea);
+
+        // ── Action row 1: Save + Add Photo
+        var actions1 = document.createElement('div');
+        actions1.className = 'actions';
+        actions1.style.marginTop = '0.75rem';
+
+        var saveBtn = document.createElement('button');
+        saveBtn.className = 'btn btn-upload';
+        saveBtn.style.background = '#5a8a5a';
+        saveBtn.textContent = 'Save';
+        saveBtn.addEventListener('click', function() {
+          item.tag = tagInput.value;
+          item.title = titleInput.value;
+          item.desc = descTextarea.value;
+          
+          // Re-sync current display array
+          item.images = propImages;
+          if (propImages.length > 0) item.image = propImages[0];
+          
+          safeStorage.setItem('lush_properties_items', JSON.stringify(items));
+          notifyOpener();
+          saveBtn.textContent = 'Saved ✓';
+          setTimeout(function() { saveBtn.textContent = 'Save'; }, 1500);
+        });
+
+        var uploadBtn = document.createElement('button');
+        uploadBtn.className = 'btn btn-upload';
+        uploadBtn.textContent = 'Add Photo';
+        uploadBtn.addEventListener('click', function() {
+          activePropertiesIdx = idx;
+          propertiesFileInput.value = '';
+          propertiesFileInput.click();
+        });
+
+        actions1.appendChild(saveBtn);
+        actions1.appendChild(uploadBtn);
+        card.appendChild(actions1);
+
+        // ── Action row 2: Hide + Delete
+        var actions2 = document.createElement('div');
+        actions2.className = 'actions';
+
+        var hideBtn = document.createElement('button');
+        hideBtn.className = 'btn btn-reset';
+        hideBtn.textContent = item.hidden ? 'Show' : 'Hide';
+        hideBtn.style.color = item.hidden ? '#7dbf8a' : 'var(--accent-2)';
+        hideBtn.addEventListener('click', function() {
+          item.hidden = !item.hidden;
+          safeStorage.setItem('lush_properties_items', JSON.stringify(items));
+          renderPropertiesSection();
+          notifyOpener();
+        });
+
+        var deleteBtn = document.createElement('button');
+        deleteBtn.className = 'btn btn-reset';
+        deleteBtn.style.color = 'var(--danger)';
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.addEventListener('click', function() {
+          if (!confirm('Permanently delete this property?')) return;
+          items.splice(idx, 1);
+          safeStorage.setItem('lush_properties_items', JSON.stringify(items));
+          renderPropertiesSection();
+          notifyOpener();
+        });
+
+        actions2.appendChild(hideBtn);
+        actions2.appendChild(deleteBtn);
+        card.appendChild(actions2);
+
+        grid.appendChild(card);
+      });
+
+      var plusCard = document.createElement('div');
+      plusCard.className = 'card-plus';
+      plusCard.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Add New Property</span>';
+      plusCard.addEventListener('click', function() {
+        var newItem = {
+          id: 'prop-dynamic-' + Date.now(),
+          image: '',
+          tag: 'New Tag',
+          title: 'New Property Name',
+          desc: 'New Property Description...',
+          link: '#reserve',
+          btnText: 'Book this space'
+        };
+        items.push(newItem);
+        safeStorage.setItem('lush_properties_items', JSON.stringify(items));
+        renderPropertiesSection();
+        notifyOpener();
+      });
+      grid.appendChild(plusCard);
+    }
+
+    // ── Init ─────────────────────────────────────────────────────────────────
+    safeStorage.init(function() {
+      renderPanel();
+      renderGallerySection();
+      renderPropertiesSection();
+    });
+  </script>
+</body>
+</html>
