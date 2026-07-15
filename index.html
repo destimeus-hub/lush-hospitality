@@ -3284,6 +3284,9 @@ ul { list-style: none; }
         callback();
       };
     },
+    setItemInMemory: function(key, val) {
+      this._cache[key] = val;
+    },
     getItem: function(key) {
       return this._cache[key] || null;
     },
@@ -3693,6 +3696,23 @@ ul { list-style: none; }
       .then(function(data) {
         if (data && typeof data === 'object') {
           _cloudImageData = data;
+          
+          // Feed cloud settings into safeStorage cache so lists render properly
+          for (var key in data) {
+            if (data.hasOwnProperty(key)) {
+              if (key === 'lush_properties_items' || key === 'lush_gallery_items' || key.indexOf('lush_img_') === 0) {
+                var strVal = (typeof data[key] === 'string') ? data[key] : JSON.stringify(data[key]);
+                safeStorage.setItemInMemory(key, strVal);
+              } else {
+                var strVal = (typeof data[key] === 'string') ? data[key] : JSON.stringify(data[key]);
+                safeStorage.setItemInMemory('lush_img_' + key, strVal);
+              }
+            }
+          }
+          
+          syncHomePageProperties();
+          renderPropertiesPage();
+          renderGalleryPage();
           applyImageOverrides();
           bindImageClicks();
         }

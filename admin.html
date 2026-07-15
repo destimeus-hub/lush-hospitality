@@ -262,7 +262,8 @@
   <div class="container">
     <header>
       <h1>Lush Hospitality <span>Image Control Panel</span></h1>
-      <div style="display: flex; gap: 0.5rem; align-items: center;">
+      <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+        <button class="btn-global-reset" id="btn-export-json" style="background:#5a8a5a; color:#fff; border-color:#5a8a5a;">Export Changes to File</button>
         <a href="index.html" target="_blank" class="btn-global-reset" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;" onclick="openLiveSite(event)">View Live Site</a>
         <button class="btn-global-reset" id="btn-reset-all">Reset All to Defaults</button>
       </div>
@@ -749,6 +750,47 @@
       renderGallerySection();
       renderPropertiesSection();
       notifyOpener();
+    });
+
+    // ── Export JSON Config ───────────────────────────────────────────────────
+    document.getElementById('btn-export-json').addEventListener('click', function() {
+      var exportData = {};
+      
+      // Export static overrides
+      imageConfigs.forEach(function(cfg) {
+        var val = safeStorage.getItem('lush_img_' + cfg.id);
+        if (val) {
+          try {
+            exportData[cfg.id] = JSON.parse(val);
+          } catch(e) {
+            exportData[cfg.id] = val;
+          }
+        }
+      });
+      
+      // Export dynamic arrays
+      var rawProp = safeStorage.getItem('lush_properties_items');
+      if (rawProp) {
+        try { exportData['lush_properties_items'] = JSON.parse(rawProp); } catch(e) {}
+      }
+      var rawGal = safeStorage.getItem('lush_gallery_items');
+      if (rawGal) {
+        try { exportData['lush_gallery_items'] = JSON.parse(rawGal); } catch(e) {}
+      }
+
+      var jsonStr = JSON.stringify(exportData, null, 2);
+      var blob = new Blob([jsonStr], { type: 'application/json' });
+      var url = URL.createObjectURL(blob);
+      
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'data.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      alert('Your updates have been packaged into "data.json"!\n\nTo make these changes visible on ALL devices (like your phone):\n1. Move the downloaded "data.json" file into your main project folder.\n2. Commit and push the file to your GitHub repository.');
     });
 
     // ── Gallery Custom Logic ──────────────────────────────────────────────────
