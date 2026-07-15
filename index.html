@@ -3639,7 +3639,9 @@ ul { list-style: none; }
     if (window.observeNewReveals) window.observeNewReveals();
   }
 
-  // ── Apply localStorage overrides to all images on page ────────────────────
+  // ── Apply image overrides from localStorage OR cloud ──────────────────────
+  var _cloudImageData = null; // loaded from data.json for cross-device sync
+
   function applyImageOverrides() {
     document.querySelectorAll('[data-admin-img]').forEach(function(img) {
       var key = img.getAttribute('data-admin-img');
@@ -3649,11 +3651,23 @@ ul { list-style: none; }
       if (!img.dataset.originalSrc) {
         img.dataset.originalSrc = img.getAttribute('src');
       }
+
+      // Try localStorage first (same browser as admin)
       var custom = _safeGetItem('lush_img_' + key);
+
+      // If no localStorage, try cloud data
+      if (!custom && _cloudImageData && _cloudImageData[key]) {
+        custom = JSON.stringify(_cloudImageData[key]);
+      }
+
       if (custom) {
         try {
           var parsed = JSON.parse(custom);
-          img.src = parsed[0];
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            img.src = parsed[0];
+          } else {
+            img.src = custom;
+          }
         } catch(e) {
           img.src = custom;
         }
@@ -3662,14 +3676,31 @@ ul { list-style: none; }
         img.style.backgroundColor = 'transparent';
         img.dataset.hasRealImage = '1';
       } else {
-        // No upload yet — hide completely, show nothing to visitors
-        img.src = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
-        img.style.opacity = '0';
-        img.style.visibility = 'hidden';
+        // No custom image — show original frame as placeholder
+        var orig = img.dataset.originalSrc;
+        if (orig) {
+          img.src = orig;
+        }
+        img.style.opacity = '1';
+        img.style.visibility = 'visible';
         img.style.backgroundColor = 'transparent';
-        img.dataset.hasRealImage = '';
+        img.dataset.hasRealImage = '1'; // allow click to see frame
       }
     });
+  }
+
+  // ── Fetch cloud image data (data.json from same domain) ───────────────────
+  function fetchCloudImages() {
+    fetch('./data.json?t=' + Date.now())
+      .then(function(r) { return r.ok ? r.json() : null; })
+      .then(function(data) {
+        if (data && typeof data === 'object') {
+          _cloudImageData = data;
+          applyImageOverrides();
+          bindImageClicks();
+        }
+      })
+      .catch(function() { /* data.json not found or empty, that's ok */ });
   }
 
   // ── Listen to localStorage changes & messages from admin.html ─────────────
@@ -3868,17 +3899,16 @@ ul { list-style: none; }
       if (!label) label = img.alt || 'Gallery';
 
       var key = img.getAttribute('data-admin-img');
+      img.style.cursor = 'pointer';
 
-      img.addEventListener('click', function(e) {
-        // Only open carousel if a real image has been uploaded
-        if (!img.dataset.hasRealImage) return;
+      // Use both click and touchend for mobile compatibility
+      function handleOpen(e) {
+        e.preventDefault();
         e.stopPropagation();
-        img.style.cursor = 'zoom-in';
         openCarouselPopup(key, label);
-      });
+      }
 
-      // Cursor: pointer only when real image exists
-      img.style.cursor = img.dataset.hasRealImage ? 'zoom-in' : 'default';
+      img.addEventListener('click', handleOpen);
     });
   }
 
@@ -3938,12 +3968,26 @@ ul { list-style: none; }
   document.addEventListener('DOMContentLoaded', function() {
     var startX = 0;
     var vp = document.getElementById('carousel-rail');
-    if (!vp) return;
-    vp.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
-    vp.addEventListener('touchend', function(e) {
-      var diff = startX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 40) slideCarousel(diff > 0 ? 1 : -1);
-    }, { passive: true });
+    if (vp) {
+      vp.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+      vp.addEventListener('touchend', function(e) {
+        var diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) slideCarousel(diff > 0 ? 1 : -1);
+      }, { passive: true });
+    }
+
+    // ── Force marquee animation on mobile ────────────────────────────────
+    var mTrack = document.querySelector('.marquee-track');
+    if (mTrack) {
+      // Restart animation to ensure it runs on mobile
+      mTrack.style.animation = 'none';
+      void mTrack.offsetHeight; // force reflow
+      mTrack.style.animation = 'marquee 42s linear infinite';
+      mTrack.style.webkitAnimation = 'marquee 42s linear infinite';
+    }
+
+    // Fetch cloud images for cross-device sync
+    fetchCloudImages();
   });
 
   safeStorage.init(function() {
