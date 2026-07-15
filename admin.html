@@ -487,6 +487,40 @@
 
     var fileInput = document.getElementById('shared-file-input');
 
+    // ── Cloudinary Cloud Uploader ────────────────────────────────────────────
+    function uploadToCloudinary(base64, callback) {
+      // Create FormData to send request to Cloudinary API
+      var formData = new FormData();
+      formData.append('file', base64);
+      formData.append('upload_preset', 'ml_default'); // standard unsigned preset
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', 'https://api.cloudinary.com/v1_1/dyv5goltb/image/upload', true);
+      
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          try {
+            var res = JSON.parse(xhr.responseText);
+            if (res.secure_url) {
+              callback(res.secure_url);
+              return;
+            }
+          } catch(e) {}
+        }
+        console.error('Cloudinary upload failed:', xhr.responseText);
+        alert('Cloudinary upload failed. Please ensure you have enabled "Unsigned Uploads" in your Cloudinary Dashboard under Settings -> Upload -> Upload presets, and that "ml_default" is set as an unsigned preset.');
+        callback(null);
+      };
+      
+      xhr.onerror = function() {
+        console.error('Cloudinary connection error');
+        alert('Could not connect to Cloudinary storage. Please check your internet connection.');
+        callback(null);
+      };
+
+      xhr.send(formData);
+    }
+
     fileInput.addEventListener('change', function() {
       var file = fileInput.files[0];
       if (!file || !activeSlotId) {
@@ -495,20 +529,35 @@
       }
 
       var slotId = activeSlotId; // capture before async
+      var previewContainer = document.getElementById('preview-' + slotId);
+      var originalContent = previewContainer ? previewContainer.innerHTML : '';
+      if (previewContainer) {
+        previewContainer.innerHTML = '<div class="empty-preview" style="background:#1c1a17;color:var(--accent-2);">Uploading to cloud... ☁️</div>';
+      }
+
       var reader = new FileReader();
       reader.onload = function(e) {
-        var base64 = e.target.result;
-        var list = staticImagesDraft[slotId];
-        var cfg = imageConfigs.find(function(c) { return c.id === slotId; });
-        ensureSlotDraft(cfg);
-        var existingList = staticImagesDraft[slotId];
-        if (existingList.length === 1 && existingList[0] === cfg.def) {
-          staticImagesDraft[slotId] = [base64];
-        } else {
-          staticImagesDraft[slotId].push(base64);
-        }
-        renderPanel();
-        fileInput.value = ''; // allow re-picking same file
+        var rawBase64 = e.target.result;
+        
+        // Compress first to save upload bandwidth
+        compressImage(rawBase64, function(compressedBase64) {
+          uploadToCloudinary(compressedBase64, function(cloudinaryUrl) {
+            if (cloudinaryUrl) {
+              var cfg = imageConfigs.find(function(c) { return c.id === slotId; });
+              ensureSlotDraft(cfg);
+              var existingList = staticImagesDraft[slotId];
+              if (existingList.length === 1 && existingList[0] === cfg.def) {
+                staticImagesDraft[slotId] = [cloudinaryUrl];
+              } else {
+                staticImagesDraft[slotId].push(cloudinaryUrl);
+              }
+              renderPanel();
+            } else {
+              if (previewContainer) previewContainer.innerHTML = originalContent;
+            }
+            fileInput.value = '';
+          });
+        });
       };
       reader.readAsDataURL(file);
     });
@@ -729,22 +778,40 @@
       }
 
       var idx = activeGalleryIdx;
+      
+      // Select preview box dynamically for user feedback
+      var cardElement = document.getElementById('grid-gallery').children[idx];
+      var previewBox = cardElement ? cardElement.querySelector('.preview-box') : null;
+      var originalContent = previewBox ? previewBox.innerHTML : '';
+      if (previewBox) {
+        previewBox.innerHTML = '<div class="empty-preview" style="background:#1c1a17;color:var(--accent-2);">Uploading... ☁️</div>';
+      }
+
       var reader = new FileReader();
       reader.onload = function(e) {
-        var base64 = e.target.result;
-        var raw = safeStorage.getItem('lush_gallery_items');
-        var items = [];
-        if (raw) {
-          try { items = JSON.parse(raw); } catch(err) { items = defaultGallery.slice(); }
-        } else { items = defaultGallery.slice(); }
+        var rawBase64 = e.target.result;
+        
+        compressImage(rawBase64, function(compressedBase64) {
+          uploadToCloudinary(compressedBase64, function(cloudinaryUrl) {
+            if (cloudinaryUrl) {
+              var raw = safeStorage.getItem('lush_gallery_items');
+              var items = [];
+              if (raw) {
+                try { items = JSON.parse(raw); } catch(err) { items = defaultGallery.slice(); }
+              } else { items = defaultGallery.slice(); }
 
-        if (items[idx]) {
-          items[idx].image = base64;
-          safeStorage.setItem('lush_gallery_items', JSON.stringify(items));
-          renderGallerySection();
-          notifyOpener();
-        }
-        galleryFileInput.value = '';
+              if (items[idx]) {
+                items[idx].image = cloudinaryUrl;
+                safeStorage.setItem('lush_gallery_items', JSON.stringify(items));
+                renderGallerySection();
+                notifyOpener();
+              }
+            } else {
+              if (previewBox) previewBox.innerHTML = originalContent;
+            }
+            galleryFileInput.value = '';
+          });
+        });
       };
       reader.readAsDataURL(file);
     });
@@ -981,31 +1048,46 @@
       }
 
       var idx = activePropertiesIdx;
+      
+      // Select preview box dynamically for user feedback
+      var cardElement = document.getElementById('grid-properties').children[idx];
+      var previewBox = cardElement ? cardElement.querySelector('.preview-box') : null;
+      var originalContent = previewBox ? previewBox.innerHTML : '';
+      if (previewBox) {
+        previewBox.innerHTML = '<div class="empty-preview" style="background:#1c1a17;color:var(--accent-2);">Uploading... ☁️</div>';
+      }
+
       var reader = new FileReader();
       reader.onload = function(e) {
         var originalBase64 = e.target.result;
         
         compressImage(originalBase64, function(compressedBase64) {
-          var raw = safeStorage.getItem('lush_properties_items');
-          var items = [];
-          if (raw) {
-            try { items = JSON.parse(raw); } catch(err) { items = defaultProperties.slice(); }
-          } else { items = defaultProperties.slice(); }
+          uploadToCloudinary(compressedBase64, function(cloudinaryUrl) {
+            if (cloudinaryUrl) {
+              var raw = safeStorage.getItem('lush_properties_items');
+              var items = [];
+              if (raw) {
+                try { items = JSON.parse(raw); } catch(err) { items = defaultProperties.slice(); }
+              } else { items = defaultProperties.slice(); }
 
-          if (items[idx]) {
-            // Ensure dynamic array exists
-            if (!items[idx].images) {
-              items[idx].images = items[idx].image ? [items[idx].image] : [];
+              if (items[idx]) {
+                // Ensure dynamic array exists
+                if (!items[idx].images) {
+                  items[idx].images = items[idx].image ? [items[idx].image] : [];
+                }
+                items[idx].images.push(cloudinaryUrl);
+                // Default main property picture is the first thumbnail
+                items[idx].image = items[idx].images[0];
+                
+                safeStorage.setItem('lush_properties_items', JSON.stringify(items));
+                renderPropertiesSection();
+                notifyOpener();
+              }
+            } else {
+              if (previewBox) previewBox.innerHTML = originalContent;
             }
-            items[idx].images.push(compressedBase64);
-            // Default main property picture is the first thumbnail
-            items[idx].image = items[idx].images[0];
-            
-            safeStorage.setItem('lush_properties_items', JSON.stringify(items));
-            renderPropertiesSection();
-            notifyOpener();
-          }
-          propertiesFileInput.value = '';
+            propertiesFileInput.value = '';
+          });
         });
       };
       reader.readAsDataURL(file);
