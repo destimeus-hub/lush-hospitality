@@ -550,6 +550,9 @@ ul { list-style: none; }
   background: var(--bg-2);
   overflow: hidden;
   padding: 1rem 0;
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .marquee-track {
@@ -559,9 +562,15 @@ ul { list-style: none; }
   animation: marquee 42s linear infinite;
   will-change: transform;
   transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-.marquee-track:hover { animation-play-state: paused; }
+/* Only pause on hover for non-touch devices */
+@media (hover: hover) {
+  .marquee-track:hover { animation-play-state: paused; }
+}
 
 .marquee-item {
   display: inline-flex;
@@ -1742,11 +1751,49 @@ ul { list-style: none; }
     gap: 0.55rem;
   }
 
-  .hero-meta { grid-template-columns: 1fr; }
+  /* Keep hero stats as 3 columns on all screens */
+  .hero-meta {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .hero-meta > div {
+    padding: 1rem 0.75rem;
+  }
+
+  .hero-meta strong {
+    font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+  }
+
+  .hero-meta span {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+  }
 
   .hero-content .display {
-    font-size: clamp(3rem, 13vw, 4.5rem);
+    font-size: clamp(2.6rem, 11vw, 4.5rem);
     max-width: none;
+    line-height: 0.95;
+  }
+
+  .hero-content .lead {
+    font-size: 0.95rem;
+    max-width: none;
+  }
+
+  .hero-content {
+    padding-bottom: 1.5rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    gap: 0.65rem;
+    width: 100%;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
   }
 
   .form-row { grid-template-columns: 1fr; }
@@ -1757,18 +1804,46 @@ ul { list-style: none; }
 @media (max-width: 640px) {
   .container,
   .container-wide {
-    width: min(100% - 1.25rem, var(--max));
+    width: min(100% - 1.5rem, var(--max));
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
   }
 
   .pill-grid { grid-template-columns: 1fr 1fr; }
 
   .hero {
-    min-height: 94svh;
+    min-height: 100svh;
+    min-height: 100dvh;
+  }
+
+  .hero-content .display {
+    font-size: clamp(2.2rem, 10vw, 3.5rem);
+  }
+
+  .hero-content .eyebrow {
+    font-size: 0.65rem;
+  }
+
+  .marquee-item {
+    padding: 0 1rem;
+    font-size: 0.95rem;
   }
 
   .hscroll-card {
     flex-basis: min(86vw, 320px);
     min-height: 380px;
+  }
+
+  .section {
+    padding-block: clamp(2.5rem, 8vw, 4rem);
+  }
+
+  .h2 {
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
+  }
+
+  .bento-card.row-2 {
+    min-height: 250px;
   }
 }
 
@@ -3582,11 +3657,17 @@ ul { list-style: none; }
         } catch(e) {
           img.src = custom;
         }
+        img.style.opacity = '1';
+        img.style.visibility = 'visible';
         img.style.backgroundColor = 'transparent';
+        img.dataset.hasRealImage = '1';
       } else {
-        // Show empty grey box if no custom image is uploaded
-        img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" style="background:%23161310;"><rect width="300" height="200" fill="%23161310"/><text x="50%" y="50%" fill="%234a4136" font-family="sans-serif" font-weight="600" font-size="13" dominant-baseline="middle" text-anchor="middle">NO IMAGE</text></svg>';
-        img.style.backgroundColor = '#161310';
+        // No upload yet — hide completely, show nothing to visitors
+        img.src = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
+        img.style.opacity = '0';
+        img.style.visibility = 'hidden';
+        img.style.backgroundColor = 'transparent';
+        img.dataset.hasRealImage = '';
       }
     });
   }
@@ -3787,12 +3868,17 @@ ul { list-style: none; }
       if (!label) label = img.alt || 'Gallery';
 
       var key = img.getAttribute('data-admin-img');
-      img.style.cursor = 'pointer';
 
       img.addEventListener('click', function(e) {
+        // Only open carousel if a real image has been uploaded
+        if (!img.dataset.hasRealImage) return;
         e.stopPropagation();
+        img.style.cursor = 'zoom-in';
         openCarouselPopup(key, label);
       });
+
+      // Cursor: pointer only when real image exists
+      img.style.cursor = img.dataset.hasRealImage ? 'zoom-in' : 'default';
     });
   }
 
