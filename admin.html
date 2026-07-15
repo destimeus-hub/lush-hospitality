@@ -441,7 +441,7 @@
     function ensureSlotDraft(cfg) {
       if (!staticImagesDraft[cfg.id]) {
         var saved = getList(cfg.id, cfg.def);
-        staticImagesDraft[cfg.id] = saved ? saved.slice() : [cfg.def];
+        staticImagesDraft[cfg.id] = saved ? saved.slice() : [];
       }
     }
 
@@ -545,12 +545,9 @@
             if (cloudinaryUrl) {
               var cfg = imageConfigs.find(function(c) { return c.id === slotId; });
               ensureSlotDraft(cfg);
-              var existingList = staticImagesDraft[slotId];
-              if (existingList.length === 1 && existingList[0] === cfg.def) {
-                staticImagesDraft[slotId] = [cloudinaryUrl];
-              } else {
-                staticImagesDraft[slotId].push(cloudinaryUrl);
-              }
+              var existingList = staticImagesDraft[slotId] || [];
+              existingList.push(cloudinaryUrl);
+              staticImagesDraft[slotId] = existingList;
               renderPanel();
             } else {
               if (previewContainer) previewContainer.innerHTML = originalContent;
@@ -675,7 +672,7 @@
         (function(slotId) {
           resetBtn.addEventListener('click', function() {
             var cfg = imageConfigs.find(function(c) { return c.id === slotId; });
-            staticImagesDraft[slotId] = [cfg.def];
+            staticImagesDraft[slotId] = [];
             renderPanel();
           });
         })(cfg.id);
@@ -687,9 +684,8 @@
 
         (function(slotId) {
           saveBtn.addEventListener('click', function() {
-            var list = staticImagesDraft[slotId];
-            var cfg = imageConfigs.find(function(c) { return c.id === slotId; });
-            if (list.length === 1 && list[0] === cfg.def) {
+            var list = staticImagesDraft[slotId] || [];
+            if (list.length === 0) {
               safeStorage.removeItem('lush_img_' + slotId);
             } else {
               safeStorage.setItem('lush_img_' + slotId, JSON.stringify(list));
