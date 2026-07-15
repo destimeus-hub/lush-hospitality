@@ -3645,9 +3645,6 @@ ul { list-style: none; }
   function applyImageOverrides() {
     document.querySelectorAll('[data-admin-img]').forEach(function(img) {
       var key = img.getAttribute('data-admin-img');
-      if (key && (key.indexOf('gallery-') === 0 || key.indexOf('gal-') === 0 || key.indexOf('prop-') === 0)) {
-        return;
-      }
       if (!img.dataset.originalSrc) {
         img.dataset.originalSrc = img.getAttribute('src');
       }
