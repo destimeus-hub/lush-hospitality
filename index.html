@@ -2222,6 +2222,11 @@ ul { list-style: none; }
   opacity: 1;
 }
 
+@keyframes threeSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 </style>
 </head>
 <body>
@@ -2435,6 +2440,50 @@ ul { list-style: none; }
               <p>Intimate celebrations. Club-like energy.</p>
             </div>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3D Interactive Virtual Lounge Section -->
+    <section class="section section-tight" data-od-id="section-3d-experience" style="background: var(--bg-2); border-block: 1px solid var(--border); overflow: hidden; position: relative;">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Virtual Lounge</p>
+          <h2 class="h2">Interactive 3D Space Explorer</h2>
+          <p class="body-lg" style="max-width: 600px; margin-top: 0.5rem; color: var(--fg-soft);">Immerse yourself in our signature aesthetic. Interact with the 3D space: drag to rotate, hover/tap elements to explore details, and toggle the ambient atmosphere.</p>
+        </div>
+      </div>
+      
+      <div class="container-wide" style="margin-top: 2rem; position: relative; padding-left: 0.75rem; padding-right: 0.75rem;">
+        <!-- Glassmorphic 3D Display Container -->
+        <div class="three-container" id="three-lounge-canvas-wrap" style="position: relative; width: 100%; height: 500px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); background: #0a0807; box-shadow: 0 20px 40px rgba(0,0,0,0.55); touch-action: none;">
+          <!-- Loading indicator -->
+          <div id="three-loading" style="position: absolute; inset: 0; background: #0a0807; display: flex; align-items: center; justify-content: center; z-index: 10; font-family: var(--font-display); color: var(--accent); transition: opacity 0.5s ease;">
+            <div style="text-align: center;">
+              <div style="width: 40px; height: 40px; border: 2px solid var(--accent); border-top-color: transparent; border-radius: 50%; animation: threeSpin 1s linear infinite; margin: 0 auto 1rem;"></div>
+              <span>Preparing 3D Atmosphere...</span>
+            </div>
+          </div>
+          
+          <!-- UI Control Panel Overlay (Glassmorphism) -->
+          <div style="position: absolute; bottom: 1.25rem; left: 1.25rem; z-index: 5; background: rgba(18, 16, 14, 0.45); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); padding: 0.85rem 1.15rem; border-radius: var(--radius); display: flex; flex-direction: column; gap: 0.65rem; color: #fff;">
+            <strong style="font-family: var(--font-display); color: var(--accent); font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase;">Atmosphere Controls</strong>
+            <div style="display: flex; gap: 0.5rem;">
+              <button id="btn-3d-theme-warm" class="btn btn-sm" style="font-size: 0.72rem; padding: 0.35rem 0.7rem; background: var(--accent); color: var(--bg); border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">Golden Hour</button>
+              <button id="btn-3d-theme-neon" class="btn btn-sm" style="font-size: 0.72rem; padding: 0.35rem 0.7rem; border: 1px solid var(--border-strong); background: rgba(255,255,255,0.02); color: var(--fg-soft); border-radius: 4px; cursor: pointer; font-weight: 600;">Midnight Teal</button>
+            </div>
+          </div>
+
+          <!-- Hotspot description box (Glassmorphic Slide-in) -->
+          <div id="three-hotspot-info" style="position: absolute; top: 1.25rem; right: 1.25rem; z-index: 5; background: rgba(18, 16, 14, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(201, 164, 106, 0.25); padding: 1.25rem; border-radius: var(--radius); width: 280px; transform: translateX(320px); opacity: 0; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <span class="card-tag" id="three-hotspot-tag" style="background: rgba(201,164,106,0.15); color: var(--accent); border: 1px solid var(--accent); font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; font-weight: 600;">Showcase</span>
+            <h4 style="font-family: var(--font-display); font-size: 1.2rem; color: #fff; margin-top: 0.5rem; margin-bottom: 0.3rem;" id="three-hotspot-title">Explore Lounge</h4>
+            <p style="font-size: 0.82rem; line-height: 1.5; color: var(--muted); margin-bottom: 0.85rem;" id="three-hotspot-desc">Hover over the pulsing white circles in the 3D room to explore spaces.</p>
+            <a id="three-hotspot-link" href="#properties" class="btn btn-arrow" style="font-size: 0.72rem; padding: 0.4rem 0.8rem; background: var(--accent); color: var(--bg); display: inline-flex; border: none; border-radius: 4px; font-weight: 600; text-decoration: none; align-items: center; gap: 4px; width: fit-content;">Explore Section <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 12px; height: 12px;"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+
+          <!-- Canvas Target -->
+          <div id="canvas-3d-target" style="width: 100%; height: 100%;"></div>
         </div>
       </div>
     </section>
@@ -4032,6 +4081,421 @@ ul { list-style: none; }
       <div class="carousel-dots" id="carousel-dots"></div>
     </div>
   </div>
+
+  <!-- Three.js Integration for Interactive 3D Lounge Section -->
+  <script>
+    (function() {
+      var tScript = document.createElement('script');
+      tScript.src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
+      tScript.onload = initThreeLounge;
+      document.body.appendChild(tScript);
+    })();
+
+    function initThreeLounge() {
+      var container = document.getElementById('canvas-3d-target');
+      if (!container) return;
+
+      var width = container.clientWidth;
+      var height = container.clientHeight;
+
+      // Scene
+      var scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x0a0807, 0.015);
+
+      // Camera
+      var camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
+      camera.position.set(0, 3, 12);
+      camera.lookAt(0, 0, 0);
+
+      // Renderer
+      var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      container.appendChild(renderer.domElement);
+
+      // Hide loading spinner
+      var loaderEl = document.getElementById('three-loading');
+      if (loaderEl) loaderEl.style.opacity = 0;
+      setTimeout(function() { if (loaderEl) loaderEl.style.display = 'none'; }, 500);
+
+      // Parent Group for rotation/interactivity
+      var sceneGroup = new THREE.Group();
+      scene.add(sceneGroup);
+
+      // Materials
+      var woodDeckMaterial = new THREE.MeshStandardMaterial({
+        color: 0x1c1714,
+        roughness: 0.3,
+        metalness: 0.1
+      });
+
+      var wallMaterial = new THREE.MeshStandardMaterial({
+        color: 0x110d0c,
+        roughness: 0.8,
+        metalness: 0.2
+      });
+
+      var goldMaterial = new THREE.MeshStandardMaterial({
+        color: 0xc9a46a,
+        roughness: 0.3,
+        metalness: 0.8
+      });
+
+      var poolWaterMaterial = new THREE.MeshStandardMaterial({
+        color: 0x14b8a6,
+        roughness: 0.1,
+        metalness: 0.1,
+        transparent: true,
+        opacity: 0.6
+      });
+
+      // Build Procedural Luxury Lounge
+      // Floor
+      var floorGeo = new THREE.BoxGeometry(10, 0.2, 8);
+      var floor = new THREE.Mesh(floorGeo, woodDeckMaterial);
+      floor.position.y = -1;
+      floor.receiveShadow = true;
+      sceneGroup.add(floor);
+
+      // Pool Water (recessed pool on right)
+      var waterGeo = new THREE.BoxGeometry(4, 0.18, 6);
+      var water = new THREE.Mesh(waterGeo, poolWaterMaterial);
+      water.position.set(3, -0.99, 0);
+      sceneGroup.add(water);
+
+      // Back Wall
+      var wallGeo = new THREE.BoxGeometry(10, 5, 0.2);
+      var backWall = new THREE.Mesh(wallGeo, wallMaterial);
+      backWall.position.set(0, 1.5, -4);
+      backWall.receiveShadow = true;
+      sceneGroup.add(backWall);
+
+      // Gold Architectural Columns
+      var columnGeo = new THREE.CylinderGeometry(0.12, 0.12, 5, 16);
+      var column1 = new THREE.Mesh(columnGeo, goldMaterial);
+      column1.position.set(-4.5, 1.5, -3.8);
+      column1.castShadow = true;
+      sceneGroup.add(column1);
+
+      var column2 = new THREE.Mesh(columnGeo, goldMaterial);
+      column2.position.set(4.5, 1.5, -3.8);
+      column2.castShadow = true;
+      sceneGroup.add(column2);
+
+      // Luxury Glass Table
+      var tableBaseGeo = new THREE.BoxGeometry(1.6, 0.6, 0.8);
+      var tableBase = new THREE.Mesh(tableBaseGeo, goldMaterial);
+      tableBase.position.set(-1.8, -0.6, 0.5);
+      sceneGroup.add(tableBase);
+
+      var tableTopGeo = new THREE.BoxGeometry(2.4, 0.05, 1.4);
+      var tableTopMat = new THREE.MeshPhysicalMaterial({
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.4,
+        roughness: 0.1,
+        transmission: 0.9,
+        thickness: 1.0
+      });
+      var tableTop = new THREE.Mesh(tableTopGeo, tableTopMat);
+      tableTop.position.set(-1.8, -0.3, 0.5);
+      sceneGroup.add(tableTop);
+
+      // Designer Wireframe Ring Lamp (Pendant)
+      var lampRingGeo = new THREE.TorusGeometry(0.6, 0.03, 8, 48);
+      var lampRing = new THREE.Mesh(lampRingGeo, goldMaterial);
+      lampRing.position.set(-1.8, 1.8, 0.5);
+      lampRing.rotation.x = Math.PI / 2;
+      sceneGroup.add(lampRing);
+
+      // Lights
+      var ambientLight = new THREE.AmbientLight(0xffffff, 0.15);
+      scene.add(ambientLight);
+
+      // Warm Spotlights (Golden hour)
+      var warmSpot = new THREE.SpotLight(0xc9a46a, 2.5);
+      warmSpot.position.set(-2, 5, 2);
+      warmSpot.angle = Math.PI / 4;
+      warmSpot.penumbra = 0.8;
+      warmSpot.castShadow = true;
+      scene.add(warmSpot);
+
+      var poolSpot = new THREE.SpotLight(0x2dd4bf, 3);
+      poolSpot.position.set(3, 4, 1);
+      poolSpot.angle = Math.PI / 3;
+      poolSpot.penumbra = 0.5;
+      scene.add(poolSpot);
+
+      // Soft direction light for subtle shadows
+      var dirLight = new THREE.DirectionalLight(0xfffbf0, 0.8);
+      dirLight.position.set(5, 8, 5);
+      dirLight.castShadow = true;
+      scene.add(dirLight);
+
+      // Hotspots setup
+      var hotspots = [];
+      var hotspotData = [
+        {
+          pos: new THREE.Vector3(-1.8, 0.1, 0.5),
+          tag: "Signature Dining",
+          title: "Luxury Fine Dining",
+          desc: "Indulge in spaces designed with premium materials: brushed gold, warm lighting, and fluted glass details.",
+          link: "#properties"
+        },
+        {
+          pos: new THREE.Vector3(3.0, -0.4, 0.0),
+          tag: "Infinity Pool",
+          title: "Waterview Lounges",
+          desc: "Stunning outdoor pools, architectural water fountains, and open-air seating curated for pure relaxation.",
+          link: "#experiences"
+        },
+        {
+          pos: new THREE.Vector3(-4.5, 1.5, -2.0),
+          tag: "Bespoke Suites",
+          title: "Minimalist Hotels",
+          desc: "Thoughtfully crafted boutique suites combining natural wood tones, designer textures, and private bars.",
+          link: "#about"
+        }
+      ];
+
+      hotspotData.forEach(function(data, index) {
+        var hotspotGroup = new THREE.Group();
+        hotspotGroup.position.copy(data.pos);
+
+        // Inner glowing sphere
+        var sphereGeo = new THREE.SphereGeometry(0.12, 16, 16);
+        var sphereMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        var sphere = new THREE.Mesh(sphereGeo, sphereMat);
+        hotspotGroup.add(sphere);
+
+        // Outer pulsing ring
+        var ringGeo = new THREE.RingGeometry(0.2, 0.28, 32);
+        var ringMat = new THREE.MeshBasicMaterial({
+          color: 0xc9a46a,
+          side: THREE.DoubleSide,
+          transparent: true,
+          opacity: 0.6
+        });
+        var ring = new THREE.Mesh(ringGeo, ringMat);
+        ring.rotation.x = Math.PI / 2;
+        hotspotGroup.add(ring);
+
+        sceneGroup.add(hotspotGroup);
+        
+        hotspots.push({
+          group: hotspotGroup,
+          ring: ring,
+          sphere: sphere,
+          data: data,
+          index: index
+        });
+      });
+
+      // Interactive mouse dragging & tilt
+      var isDragging = false;
+      var previousMousePosition = { x: 0, y: 0 };
+      var rotationSpeed = 0.005;
+
+      var currentRotationY = -0.3;
+      var currentRotationX = 0.25;
+      var targetRotationY = -0.3;
+      var targetRotationX = 0.25;
+
+      // Track hover (raycaster)
+      var raycaster = new THREE.Raycaster();
+      var mouse = new THREE.Vector2();
+      var activeHotspot = null;
+
+      var canvasWrap = document.getElementById('three-lounge-canvas-wrap');
+
+      canvasWrap.addEventListener('mousedown', function(e) {
+        isDragging = true;
+        previousMousePosition = { x: e.clientX, y: e.clientY };
+      });
+
+      canvasWrap.addEventListener('mousemove', function(e) {
+        var rect = renderer.domElement.getBoundingClientRect();
+        // Calculate normalized mouse coords
+        mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
+        if (isDragging) {
+          var deltaX = e.clientX - previousMousePosition.x;
+          var deltaY = e.clientY - previousMousePosition.y;
+
+          targetRotationY += deltaX * rotationSpeed;
+          targetRotationX += deltaY * rotationSpeed;
+          
+          // Limit vertical rotation to prevent flipping upside down
+          targetRotationX = Math.max(-0.2, Math.min(0.8, targetRotationX));
+
+          previousMousePosition = { x: e.clientX, y: e.clientY };
+        }
+      });
+
+      window.addEventListener('mouseup', function() {
+        isDragging = false;
+      });
+
+      // Touch Support
+      canvasWrap.addEventListener('touchstart', function(e) {
+        if (e.touches.length === 1) {
+          isDragging = true;
+          previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        }
+      }, { passive: true });
+
+      canvasWrap.addEventListener('touchmove', function(e) {
+        if (isDragging && e.touches.length === 1) {
+          var rect = renderer.domElement.getBoundingClientRect();
+          mouse.x = ((e.touches[0].clientX - rect.left) / rect.width) * 2 - 1;
+          mouse.y = -((e.touches[0].clientY - rect.top) / rect.height) * 2 + 1;
+
+          var deltaX = e.touches[0].clientX - previousMousePosition.x;
+          var deltaY = e.touches[0].clientY - previousMousePosition.y;
+
+          targetRotationY += deltaX * rotationSpeed;
+          targetRotationX += deltaY * rotationSpeed;
+          targetRotationX = Math.max(-0.2, Math.min(0.8, targetRotationX));
+
+          previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        }
+      }, { passive: true });
+
+      canvasWrap.addEventListener('touchend', function() {
+        isDragging = false;
+      });
+
+      // Atmosphere button triggers
+      var btnWarm = document.getElementById('btn-3d-theme-warm');
+      var btnNeon = document.getElementById('btn-3d-theme-neon');
+
+      btnWarm.addEventListener('click', function() {
+        btnWarm.style.background = 'var(--accent)';
+        btnWarm.style.color = 'var(--bg)';
+        btnWarm.style.border = 'none';
+        
+        btnNeon.style.background = 'rgba(255,255,255,0.02)';
+        btnNeon.style.color = 'var(--fg-soft)';
+        btnNeon.style.border = '1px solid var(--border-strong)';
+
+        // Transition lights to Golden Warm
+        warmSpot.color.setHex(0xc9a46a);
+        poolSpot.color.setHex(0x2dd4bf);
+        scene.background = null;
+        renderer.setClearColor(0x0a0807, 0);
+      });
+
+      btnNeon.addEventListener('click', function() {
+        btnNeon.style.background = 'var(--accent)';
+        btnNeon.style.color = 'var(--bg)';
+        btnNeon.style.border = 'none';
+        
+        btnWarm.style.background = 'rgba(255,255,255,0.02)';
+        btnWarm.style.color = 'var(--fg-soft)';
+        btnWarm.style.border = '1px solid var(--border-strong)';
+
+        // Transition lights to Midnight/Teal
+        warmSpot.color.setHex(0x0f766e);
+        poolSpot.color.setHex(0xec4899);
+      });
+
+      // UI Description Display
+      var infoBox = document.getElementById('three-hotspot-info');
+      var infoTag = document.getElementById('three-hotspot-tag');
+      var infoTitle = document.getElementById('three-hotspot-title');
+      var infoDesc = document.getElementById('three-hotspot-desc');
+      var infoLink = document.getElementById('three-hotspot-link');
+
+      function showHotspotInfo(data) {
+        infoTag.textContent = data.tag;
+        infoTitle.textContent = data.title;
+        infoDesc.textContent = data.desc;
+        infoLink.href = data.link;
+        infoBox.style.transform = 'translateX(0)';
+        infoBox.style.opacity = '1';
+      }
+
+      function hideHotspotInfo() {
+        infoBox.style.transform = 'translateX(320px)';
+        infoBox.style.opacity = '0';
+      }
+
+      // Animation loop
+      var clock = new THREE.Clock();
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        var elapsedTime = clock.getElapsedTime();
+
+        // Smoothly interpolate rotation (lerp)
+        currentRotationY += (targetRotationY - currentRotationY) * 0.1;
+        currentRotationX += (targetRotationX - currentRotationX) * 0.1;
+
+        sceneGroup.rotation.y = currentRotationY;
+        sceneGroup.rotation.x = currentRotationX;
+
+        // Pulse Hotspots
+        hotspots.forEach(function(h) {
+          // Pulsing scale
+          var scale = 1 + Math.sin(elapsedTime * 4) * 0.15;
+          h.ring.scale.set(scale, scale, scale);
+          
+          // Floating offset
+          h.group.position.y = h.data.pos.y + Math.sin(elapsedTime * 2 + h.index) * 0.05;
+
+          // Keep hotspots facing camera (billboarding)
+          h.group.quaternion.copy(camera.quaternion);
+        });
+
+        // Raycast check
+        raycaster.setFromCamera(mouse, camera);
+        
+        // Test intersections against spheres in hotspots
+        var sphereObjects = hotspots.map(function(h) { return h.sphere; });
+        var intersects = raycaster.intersectObjects(sphereObjects);
+
+        if (intersects.length > 0) {
+          var hoveredSphere = intersects[0].object;
+          var match = hotspots.find(function(h) { return h.sphere === hoveredSphere; });
+          
+          if (match && activeHotspot !== match) {
+            activeHotspot = match;
+            // Visual feedback
+            match.sphere.material.color.setHex(0xc9a46a);
+            canvasWrap.style.cursor = 'pointer';
+            showHotspotInfo(match.data);
+          }
+        } else {
+          if (activeHotspot) {
+            activeHotspot.sphere.material.color.setHex(0xffffff);
+            activeHotspot = null;
+            canvasWrap.style.cursor = 'default';
+            // Auto hide info box after delay if not hovering another
+            setTimeout(function() {
+              if (!activeHotspot) hideHotspotInfo();
+            }, 3000);
+          }
+        }
+
+        renderer.render(scene, camera);
+      }
+
+      animate();
+
+      // Resize handler
+      window.addEventListener('resize', function() {
+        var w = container.clientWidth;
+        var h = container.clientHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      });
+    }
+  </script>
 
 </body>
 </html>
