@@ -2435,6 +2435,47 @@ ul { list-style: none; }
               <p>Intimate celebrations. Club-like energy.</p>
             </div>
           </article>
+    </section>
+
+    <!-- VIP Lounge Access Section with 3D Key Card -->
+    <section class="section" data-od-id="section-vip" style="border-block: 1px solid var(--border); background: radial-gradient(circle at 80% 50%, rgba(201,164,106,0.04), transparent 50%), var(--bg); overflow: hidden; position: relative;">
+      <div class="container">
+        <div class="grid-2" style="align-items: center; gap: clamp(2rem, 6vw, 5rem);">
+          <div class="reveal">
+            <p class="eyebrow">Lush Privilege</p>
+            <h2 class="h2" style="margin-top: 0.5rem; margin-bottom: 1.25rem;">Unlock the LUSH VIP Experience</h2>
+            <p class="body-lg" style="color: var(--fg-soft); margin-bottom: 1.5rem;">Our exclusive membership card grants priority suite reservations, access to private culinary events at Miyabi lounge, secret menus across our cafes, and complimentary GP Cinema premium lounge access.</p>
+            
+            <ul class="feature-list" style="margin-bottom: 2rem;">
+              <li style="padding-block: 0.75rem; border-top: 1px solid var(--border); display: grid; grid-template-columns: 2.5rem 1fr; gap: 0.5rem; align-items: start;">
+                <span class="num" style="font-family: var(--font-display); font-size: 1.15rem; color: var(--accent); font-weight: 500;">01</span>
+                <div>
+                  <h4 style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 500; margin-bottom: 0.2rem;">Priority Booking</h4>
+                  <p style="font-size: 0.85rem; color: var(--muted);">Guaranteed suites and lounge tables even during peak hours.</p>
+                </div>
+              </li>
+              <li style="padding-block: 0.75rem; border-top: 1px solid var(--border); display: grid; grid-template-columns: 2.5rem 1fr; gap: 0.5rem; align-items: start;">
+                <span class="num" style="font-family: var(--font-display); font-size: 1.15rem; color: var(--accent); font-weight: 500;">02</span>
+                <div>
+                  <h4 style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 500; margin-bottom: 0.2rem;">Exclusive Lounges</h4>
+                  <p style="font-size: 0.85rem; color: var(--muted);">Access to private VIP rooms and complimentary lounge services.</p>
+                </div>
+              </li>
+            </ul>
+
+            <a class="btn btn-soft" href="#reserve" style="font-weight: 600;">Request Invitation</a>
+          </div>
+
+          <!-- 3D Interactive Card Canvas Container -->
+          <div class="reveal" style="position: relative; width: 100%; height: 420px; display: flex; align-items: center; justify-content: center;">
+            <div id="three-card-container" style="width: 100%; height: 100%; position: relative; border-radius: var(--radius-lg); overflow: hidden; background: radial-gradient(circle at center, rgba(30, 25, 22, 0.45) 0%, transparent 70%); cursor: grab; display: flex; align-items: center; justify-content: center; touch-action: none;">
+              <!-- Loading indicator -->
+              <div id="card-3d-loading" style="position: absolute; color: var(--accent); font-size: 0.85rem; font-weight: 500; display: flex; align-items: center; gap: 0.5rem; transition: opacity 0.4s;">
+                <div style="width: 16px; height: 16px; border: 1.5px solid var(--accent); border-top-color: transparent; border-radius: 50%; animation: threeSpin 0.8s linear infinite;"></div>
+                <span>Configuring 3D VIP Asset...</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -4032,6 +4073,299 @@ ul { list-style: none; }
       <div class="carousel-dots" id="carousel-dots"></div>
     </div>
   </div>
+
+  <!-- Three.js Integration for VIP Card -->
+  <script>
+    (function() {
+      var tScript = document.createElement('script');
+      tScript.src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
+      tScript.onload = initThreeVIPCard;
+      document.body.appendChild(tScript);
+    })();
+
+    function initThreeVIPCard() {
+      var container = document.getElementById('three-card-container');
+      if (!container) return;
+
+      var width = container.clientWidth;
+      var height = container.clientHeight;
+
+      // Scene
+      var scene = new THREE.Scene();
+
+      // Camera
+      var camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 100);
+      camera.position.set(0, 0, 7.5);
+
+      // Renderer
+      var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.appendChild(renderer.domElement);
+
+      // Hide loading spinner
+      var loaderEl = document.getElementById('card-3d-loading');
+      if (loaderEl) {
+        loaderEl.style.opacity = '0';
+        setTimeout(function() { loaderEl.style.display = 'none'; }, 400);
+      }
+
+      // Card Group (holds the card and rotates)
+      var cardGroup = new THREE.Group();
+      scene.add(cardGroup);
+
+      // Materials
+      var cardMaterial = new THREE.MeshPhysicalMaterial({
+        color: 0x181412,
+        roughness: 0.12,
+        metalness: 0.05,
+        transparent: true,
+        opacity: 0.90,
+        transmission: 0.8,
+        thickness: 0.4,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.05
+      });
+
+      var goldMaterial = new THREE.MeshStandardMaterial({
+        color: 0xd9b373,
+        roughness: 0.22,
+        metalness: 0.92
+      });
+
+      var darkStripeMaterial = new THREE.MeshStandardMaterial({
+        color: 0x111111,
+        roughness: 0.4,
+        metalness: 0.1
+      });
+
+      // 1. Create Rounded Card Geometry
+      var cardShape = new THREE.Shape();
+      var w = 4.4, h = 2.8, r = 0.22;
+      var x = -w/2, y = -h/2;
+      
+      cardShape.moveTo(x + r, y);
+      cardShape.lineTo(x + w - r, y);
+      cardShape.quadraticCurveTo(x + w, y, x + w, y + r);
+      cardShape.lineTo(x + w, y + h - r);
+      cardShape.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      cardShape.lineTo(x + r, y + h);
+      cardShape.quadraticCurveTo(x, y + h, x, y + h - r);
+      cardShape.lineTo(x, y + r);
+      cardShape.quadraticCurveTo(x, y, x + r, y);
+
+      var extrudeSettings = {
+        depth: 0.06,
+        bevelEnabled: true,
+        bevelSegments: 4,
+        steps: 1,
+        bevelSize: 0.015,
+        bevelThickness: 0.015
+      };
+
+      var cardGeo = new THREE.ExtrudeGeometry(cardShape, extrudeSettings);
+      cardGeo.center(); // Center geometry
+      
+      var cardMesh = new THREE.Mesh(cardGeo, cardMaterial);
+      cardGroup.add(cardMesh);
+
+      // 2. Add Gold Raised Border (Face of the Card)
+      var borderShape = new THREE.Shape();
+      var bw = w - 0.18, bh = h - 0.18, br = r - 0.04;
+      var bx = -bw/2, by = -bh/2;
+      
+      borderShape.moveTo(bx + br, by);
+      borderShape.lineTo(bx + bw - br, by);
+      borderShape.quadraticCurveTo(bx + bw, by, bx + bw, by + br);
+      borderShape.lineTo(bx + bw, by + bh - br);
+      borderShape.quadraticCurveTo(bx + bw, by + bh, bx + bw - br, by + bh);
+      borderShape.lineTo(bx + br, by + bh);
+      borderShape.quadraticCurveTo(bx, by + bh, bx, by + bh - br);
+      borderShape.lineTo(bx, by + br);
+      borderShape.quadraticCurveTo(bx, by, bx + br, by);
+
+      var borderGeo = new THREE.ExtrudeGeometry(borderShape, {
+        depth: 0.01,
+        bevelEnabled: true,
+        bevelSegments: 2,
+        steps: 1,
+        bevelSize: 0.006,
+        bevelThickness: 0.006
+      });
+      borderGeo.center();
+      
+      var borderMesh = new THREE.Mesh(borderGeo, goldMaterial);
+      borderMesh.position.z = 0.045; // slight offset forward
+      cardGroup.add(borderMesh);
+
+      // 3. Add Metallic Microchip (Gold Chip)
+      var chipGeo = new THREE.BoxGeometry(0.55, 0.45, 0.015);
+      var chipMesh = new THREE.Mesh(chipGeo, goldMaterial);
+      chipMesh.position.set(-1.3, 0.5, 0.045);
+      cardGroup.add(chipMesh);
+
+      // 4. Add Monogram LUSH Logo (Overlapping Toruses & Rings)
+      var logoGroup = new THREE.Group();
+      logoGroup.position.set(0, 0, 0.045);
+
+      var innerRing = new THREE.TorusGeometry(0.38, 0.035, 8, 32);
+      var ringMesh = new THREE.Mesh(innerRing, goldMaterial);
+      logoGroup.add(ringMesh);
+
+      var diamondGeo = new THREE.OctahedronGeometry(0.18, 0);
+      var diamondMesh = new THREE.Mesh(diamondGeo, goldMaterial);
+      logoGroup.add(diamondMesh);
+      
+      cardGroup.add(logoGroup);
+
+      // 5. Back of the Card Details (Magnetic Stripe)
+      var stripeGeo = new THREE.BoxGeometry(w + 0.1, 0.45, 0.01);
+      var stripeMesh = new THREE.Mesh(stripeGeo, darkStripeMaterial);
+      stripeMesh.position.set(0, 0.5, -0.045);
+      cardGroup.add(stripeMesh);
+
+      var signatureGeo = new THREE.BoxGeometry(w - 1.2, 0.3, 0.01);
+      var signatureMesh = new THREE.Mesh(signatureGeo, new THREE.MeshStandardMaterial({ color: 0xdddddd, roughness: 0.9 }));
+      signatureMesh.position.set(-0.4, -0.3, -0.045);
+      cardGroup.add(signatureMesh);
+
+      var backChipGeo = new THREE.BoxGeometry(0.45, 0.3, 0.01);
+      var backChip = new THREE.Mesh(backChipGeo, goldMaterial);
+      backChip.position.set(1.4, -0.3, -0.045);
+      cardGroup.add(backChip);
+
+      // Lighting
+      var ambientLight = new THREE.AmbientLight(0xffffff, 0.35);
+      scene.add(ambientLight);
+
+      // Light behind the card for glow refraction
+      var glowLight = new THREE.PointLight(0xc9a46a, 2.2, 8);
+      glowLight.position.set(0, 0, -1);
+      scene.add(glowLight);
+
+      // Shiny highlight reflection light
+      var flashLight = new THREE.DirectionalLight(0xffffff, 1.8);
+      flashLight.position.set(2, 4, 6);
+      scene.add(flashLight);
+
+      // Interactivity Variables
+      var isDragging = false;
+      var previousMousePosition = { x: 0, y: 0 };
+      
+      var targetRotationY = 0;
+      var targetRotationX = 0;
+      var currentRotationY = 0;
+      var currentRotationX = 0;
+      
+      var defaultAutoRotationSpeed = 0.008;
+      var mouseHoverActive = false;
+
+      // Mouse Move Hover Tilt
+      container.addEventListener('mousemove', function(e) {
+        var rect = container.getBoundingClientRect();
+        var mx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+        var my = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
+        if (!isDragging) {
+          mouseHoverActive = true;
+          // Soft tilt on hover
+          targetRotationY = mx * 0.45;
+          targetRotationX = -my * 0.35;
+        } else {
+          var deltaX = e.clientX - previousMousePosition.x;
+          var deltaY = e.clientY - previousMousePosition.y;
+
+          targetRotationY += deltaX * 0.008;
+          targetRotationX += deltaY * 0.008;
+          targetRotationX = Math.max(-0.8, Math.min(0.8, targetRotationX));
+
+          previousMousePosition = { x: e.clientX, y: e.clientY };
+        }
+      });
+
+      container.addEventListener('mouseleave', function() {
+        mouseHoverActive = false;
+      });
+
+      // Mouse drag controls to spin card 360
+      container.addEventListener('mousedown', function(e) {
+        isDragging = true;
+        previousMousePosition = { x: e.clientX, y: e.clientY };
+      });
+
+      window.addEventListener('mouseup', function() {
+        isDragging = false;
+      });
+
+      // Touch controls
+      container.addEventListener('touchstart', function(e) {
+        if (e.touches.length === 1) {
+          isDragging = true;
+          previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        }
+      }, { passive: true });
+
+      container.addEventListener('touchmove', function(e) {
+        if (isDragging && e.touches.length === 1) {
+          var deltaX = e.touches[0].clientX - previousMousePosition.x;
+          var deltaY = e.touches[0].clientY - previousMousePosition.y;
+
+          targetRotationY += deltaX * 0.008;
+          targetRotationX += deltaY * 0.008;
+          targetRotationX = Math.max(-0.8, Math.min(0.8, targetRotationX));
+
+          previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        }
+      }, { passive: true });
+
+      container.addEventListener('touchend', function() {
+        isDragging = false;
+      });
+
+      // Animation Loop
+      var clock = new THREE.Clock();
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        var delta = clock.getDelta();
+        var elapsed = clock.getElapsedTime();
+
+        if (!mouseHoverActive && !isDragging) {
+          // Slow passive rotation
+          targetRotationY += defaultAutoRotationSpeed * 0.4;
+          // Return vertical angle to 0 slowly
+          targetRotationX += (0 - targetRotationX) * 0.05;
+        }
+
+        // Smooth interpolation (lerp)
+        currentRotationY += (targetRotationY - currentRotationY) * 0.08;
+        currentRotationX += (targetRotationX - currentRotationX) * 0.08;
+
+        cardGroup.rotation.y = currentRotationY;
+        cardGroup.rotation.x = currentRotationX;
+
+        // Subtle floating translate effect
+        cardGroup.position.y = Math.sin(elapsed * 1.5) * 0.08;
+
+        // Shimmer specular highlight sweep
+        flashLight.position.x = 3 + Math.sin(elapsed * 0.8) * 4;
+
+        renderer.render(scene, camera);
+      }
+
+      animate();
+
+      // Resize listener
+      window.addEventListener('resize', function() {
+        var w = container.clientWidth;
+        var h = container.clientHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      });
+    }
+  </script>
 
 </body>
 </html>
